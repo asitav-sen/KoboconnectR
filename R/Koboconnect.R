@@ -206,6 +206,7 @@ get_kobo_pass <- function() {
 #'
 #' @param url The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"
 #' @param simplified A logical value, default is false
+#' @param kobo.token a string (the token value)
 #' @return The function returns the asset details from the API, inform of a data frame or json.
 #'
 #' @examples
@@ -219,10 +220,10 @@ get_kobo_pass <- function() {
 #'
 #' @export
 
-kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F) {
+kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kobo.token=get_kobo_token()) {
 
   fullurl<-paste0("https://",url,"/api/v2/assets.json")
-  auth.token<-paste0("Token ",get_kobo_token())
+  auth.token<-paste0("Token ",kobo.token)
   respon<-GET(fullurl, add_headers(.headers=c(Authorization=auth.token)), user.agent)
   parsed <- fromJSON(content(respon, "text"), simplifyVector = FALSE)
 

@@ -4,12 +4,18 @@
 \alias{kobotools_api}
 \title{Check kobotools API and retrieve overall info about the projects/assets}
 \usage{
-kobotools_api(url = "kobo.humanitarianresponse.info", simplified = F)
+kobotools_api(
+  url = "kobo.humanitarianresponse.info",
+  simplified = F,
+  kobo.token = get_kobo_token()
+)
 }
 \arguments{
 \item{url}{The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"}
 
 \item{simplified}{A logical value, default is false}
+
+\item{kobo.token}{a string (the token value)}
 }
 \value{
 The function returns the asset details from the API, inform of a data frame or json.
