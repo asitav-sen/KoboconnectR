@@ -9,8 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of Koboconnect is to make it facilitate data extraction from
-Kobotools projects/assets into R.
+The goal of Koboconnect is to facilitate data extraction from Kobotools
+projects/assets into R.
 
 ## Installation
 
@@ -162,3 +162,6 @@ The following packages have been used to develop this.
 7.  Package
     [`Roxygen2`](https://cran.r-project.org/web/packages/roxygen2/index.html)
     to help with documentation
+8.  Package
+    [`testthat`](https://cran.r-project.org/web/packages/testthat/index.html)
+    for automation of testing
