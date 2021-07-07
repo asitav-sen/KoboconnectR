@@ -13,5 +13,10 @@ LazyData: true
 RoxygenNote: 7.1.1
 Imports:
     httr,
-    jsonlite
+    curl,
+    jsonlite,
+    mime,
+    openssl,
+    R6,
+    methods
 Suggests: 

@@ -1,8 +1,3 @@
-library(httr)
-library(jsonlite)
-library(tidyverse)
-
-
 #' Check kobotools API and retrieve overall info about the projects/assets
 #'
 #'@description

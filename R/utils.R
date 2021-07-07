@@ -1,4 +1,4 @@
 # Setting User Agent
 
-user.agent <- user_agent("http://github.com/asitav-sen/KoboconnectR")
+user.agent <- httr::user_agent("http://github.com/asitav-sen/KoboconnectR")
 
