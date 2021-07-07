@@ -1,4 +1,4 @@
 library(testthat)
-library(Koboconnect)
+library(KoboconnectR)
 
-test_check("Koboconnect")
+test_check("KoboconnectR")
