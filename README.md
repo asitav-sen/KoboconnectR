@@ -19,7 +19,7 @@ installed from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("asitav-sen/Koboconnect")
+devtools::install_github("asitav-sen/KoboconnectR")
 ```
 
 ## Getting started
@@ -31,7 +31,7 @@ ways for one to extract the token value. This token can be stored in
 your Renviron using the `set_kobo_token` function.
 
 ``` r
-library(Koboconnect)
+library(KoboconnectR)
 set_kobo_token("this is a token value")
 ```
 
