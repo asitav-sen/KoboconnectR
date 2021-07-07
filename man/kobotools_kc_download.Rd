@@ -7,8 +7,8 @@
 kobotools_kc_download(
   assetid = NULL,
   url = "kc.humanitarianresponse.info",
-  user.id = get_kobo_id(),
-  pass = get_kobo_pass()
+  user.id = "id",
+  pass = "password"
 )
 }
 \arguments{
@@ -32,7 +32,7 @@ the [kobotools_data_list_kc()] function.
 }
 \examples{
 /notrun
-kobotools_kc_download(assetid="12345")
+kobotools_kc_download(assetid="12345", user.id="id", pass="password")
 
 }
 \seealso{

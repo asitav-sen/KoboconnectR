@@ -6,8 +6,8 @@
 \usage{
 kobotools_data_list_kc(
   url = "kc.humanitarianresponse.info",
-  user.id = get_kobo_id(),
-  pass = get_kobo_pass()
+  user.id = "id",
+  pass = "password"
 )
 }
 \arguments{
@@ -31,7 +31,8 @@ find out the link to the submitted data files. In this function the returned `id
 important which will be used in [kobotools_kc_download()] to download csv files.
 }
 \examples{
-kobotools_data_list_kc("kc.humanitarianresponse.info")
+/notrun
+kobotools_data_list_kc("kc.humanitarianresponse.info", user.id="id", pass="password")
 
 }
 \seealso{

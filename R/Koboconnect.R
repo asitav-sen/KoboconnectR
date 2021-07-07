@@ -1,196 +1,6 @@
 library(httr)
-library(safer)
 library(jsonlite)
 library(tidyverse)
-
-#' Set encrypted token in Renviron
-#'
-#'@description
-#' `set_kobo_token` encrypts your token and stores in Renviron. It can later be retrieved by using `get_kobo_token`.
-#'
-#'@details
-#' The function takes two parameters. The first is the `token` which must be a string/character wrapped in double quotes.
-#' The second is the `samplekey`. The default is set to "abracadabra". One may change it.
-#' @param token The Kobotoools API token as string
-#' @param samplekey A string that you want to set as key
-#' @return The function encrypts the token using the key provided and stores in Renviron.
-#' @examples
-#' set_kobo_token("d7a1faf575e047d4ebb1ed")
-#' set_kobo_token("mykobotoolstoken", "mykey")
-#'
-#' @seealso [get_kobo_token()]
-#'
-#' @importFrom safer encrypt_string
-#'
-#' @export
-
-set_kobo_token<-function(token=NULL, samplekey="abracadabra"){
-
-  # check if token is string
-  if (!is.character(token)) {
-    stop("Yeah. I only work with Good characters. Try a new one.",
-         call. = FALSE)
-  }
-
-  # check if null
-  if (is.null(token)) {
-    stop("I don't like emptiness. Try again.",
-         call. = FALSE)
-  }
-
-  # Encrypt key
-  kobo_token_key<-samplekey
-
-  # Encrypt token
-  encrypted_kobo_token<-encrypt_string(token, samplekey)
-
-  # Store in Renviron
-  Sys.setenv(kobo_key=kobo_token_key, kobo_token=encrypted_kobo_token)
-
-}
-
-
-#' Retrieve encrypted token from Renviron
-#'
-#'@description
-#' `get_kobo_token` retrieves your kobotools token from Renviron, which was set using `set_kobo_token`.
-#'
-#'@details The function does not take in input. It simply returns the kobotools token saved in the Renviron.
-#'
-#' @return Returns the original token as a string
-#' @examples
-#' get_kobo_token()
-#'
-#' @seealso [set_kobo_token()]
-#'
-#' @importFrom safer decrypt_string
-#'
-#' @export
-
-get_kobo_token <- function() {
-
-
-  # get the variables from R environment
-  kobo_token_key<-Sys.getenv("kobo_key")
-  encrypted_kobo_token<-Sys.getenv("kobo_token")
-
-  # Decrypt the variable
-  kat <- decrypt_string(encrypted_kobo_token, kobo_token_key)
-
-  # Return token
-  kat
-}
-
-
-#' Set userid and password
-#'
-#'@description
-#' `set_kobo_id_pass` encrypts your kobotools id and password in Renviron. It can later be retrieved by using `get_kobo_id` and `get_kobo_pass`.
-#'
-#'@details
-#' The function takes three parameters. The first is the `id` which must be a string/character wrapped in double quotes.
-#' The second one is the `password` which must also be a string.
-#' The third is the `samplekey`. The default is set to "abracadabra". One may change it.
-#'
-#' @param id The Kobotoools id as string
-#' @param password The Kobotools password as string
-#' @param samplekey A string that you want to set as key
-#'
-#' @return The function encrypts the id and password provided and stores in Renviron.
-#' @examples
-#' set_kobo_id_pass("myuserid","mypassword")
-#' set_kobo_token("myuserid","mypassword", "mykey")
-#'
-#' @seealso [get_kobo_id()], [get_kobo_pass()]
-#'
-#' @importFrom safer encrypt_string
-#'
-#' @export
-
-set_kobo_id_pass<-function(id=NULL, password=NULL, samplekey="abracadabra"){
-
-  # check if id and passpword is string
-  if (!(is.character(id) | is.character(password))) {
-    stop("Yeah. I only work with Good characters. Try a new one.",
-         call. = FALSE)
-  }
-
-  # check if null
-  if (is.null(id) | is.null(password)) {
-    stop("I don't like emptiness. Try again.",
-         call. = FALSE)
-  }
-
-  # Create encrypted key
-  kobo_idpass_key<-samplekey
-  encrypted_kobo_id<-encrypt_string(id, samplekey)
-  encrypted_kobo_password<-encrypt_string(password, samplekey)
-  Sys.setenv(kobo_idpass_key=kobo_idpass_key, kobo_id=encrypted_kobo_id, kobo_pass=encrypted_kobo_password)
-
-}
-
-#' Retrieve kobotools id from Renviron which was set using `set_kobo_id_pass`
-#'
-#'@description
-#' `get_kobo_id` retrieves your kobotools id from Renviron, which was set using `set_kobo_id_pass`.
-#'
-#'@details The function does not take in input. It simply returns the kobotools id saved in the Renviron.
-#'
-#' @return Returns the original id as a string
-#' @examples
-#' get_kobo_id()
-#'
-#' @seealso [set_kobo_id_pass()]
-#'
-#' @importFrom safer decrypt_string
-#'
-#' @export
-
-get_kobo_id <- function() {
-
-
-  # get the variables from R environment
-  kobo_id_key<-Sys.getenv("kobo_idpass_key")
-  encrypted_kobo_id<-Sys.getenv("kobo_id")
-
-  # Decrypt the variable
-  kat <- decrypt_string(encrypted_kobo_id, kobo_id_key)
-
-  # Return token
-  kat
-}
-
-
-#' Retrieve kobotools password from Renviron which was set using `set_kobo_id_pass`
-#'
-#'@description
-#' `get_kobo_pass` retrieves your kobotools password from Renviron, which was set using `set_kobo_id_pass`.
-#'
-#'@details The function does not take in input. It simply returns the kobotools password saved in the Renviron.
-#'
-#' @return Returns the original password as a string
-#' @examples
-#' get_kobo_pass()
-#'
-#' @seealso [set_kobo_id_pass()]
-#'
-#' @importFrom safer decrypt_string
-#'
-#' @export
-
-get_kobo_pass <- function() {
-
-
-  # get the variables from R environment
-  kobo_id_key<-Sys.getenv("kobo_idpass_key")
-  encrypted_kobo_pass<-Sys.getenv("kobo_pass")
-
-  # Decrypt the variable
-  kat <- decrypt_string(encrypted_kobo_pass, kobo_id_key)
-
-  # Return token
-  kat
-}
 
 
 #' Check kobotools API and retrieve overall info about the projects/assets
@@ -199,7 +9,7 @@ get_kobo_pass <- function() {
 #' `kobotools_api` is a wrapper for kobotools API `https://[kpi-url]/api/v2/assets.json`
 #'
 #'@details
-#' The function takes two variables. First one is `url` which is the `[kpi-url]`. FOr most users it will be "kobo.humanitarianresponse.info" or
+#' The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "kobo.humanitarianresponse.info" or
 #' "kf.kobotoolbox.org". Former is the default. THe second parameter is `simplified` which takes a logical value. If set to true,
 #' the function will return selected values from the parsed data and return a data frame. WHen set to false, a json will be reurned with
 #' all the details. Token needs to be set before the function can be used.
@@ -210,17 +20,16 @@ get_kobo_pass <- function() {
 #' @return The function returns the asset details from the API, inform of a data frame or json.
 #'
 #' @examples
-#' kobotools_api()
-#' kobotools_api(url="kobo.humanitarianresponse.info", simplified=T)
+#' /notrun
+#' kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, token="token)
 #'
-#' @seealso [set_kobo_token()]
 #'
 #' @importFrom httr GET add_headers content
 #' @importFrom jsonlite fromJSON
 #'
 #' @export
 
-kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kobo.token=get_kobo_token()) {
+kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kobo.token=NULL) {
 
   fullurl<-paste0("https://",url,"/api/v2/assets.json")
   auth.token<-paste0("Token ",kobo.token)
@@ -276,7 +85,8 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kob
 #' @return The function returns the list of assets/projects in kobotools, in form of a json.
 #'
 #' @examples
-#' kobotools_data_list_kc("kc.humanitarianresponse.info")
+#' /notrun
+#' kobotools_data_list_kc("kc.humanitarianresponse.info", user.id="id", pass="password")
 #'
 #' @seealso [kobotools_kc_download()]
 #'
@@ -286,7 +96,7 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kob
 #' @export
 
 
-kobotools_data_list_kc<- function(url="kc.humanitarianresponse.info", user.id=get_kobo_id(), pass=get_kobo_pass()) {
+kobotools_data_list_kc<- function(url="kc.humanitarianresponse.info", user.id="id", pass="password") {
   fullurl<-paste0("https://",url,"/api/v1/data?format=json")
   userid<- user.id
   password<- pass
@@ -313,8 +123,8 @@ kobotools_data_list_kc<- function(url="kc.humanitarianresponse.info", user.id=ge
 #' @return The function returns the data
 #'
 #' @examples
-#' /notrun
-#' kobotools_kc_download(assetid="12345")
+#'/notrun
+#' kobotools_kc_download(assetid="12345", user.id="id", pass="password")
 #'
 #' @seealso [kobotools_data_list_kc()]
 #'
@@ -325,7 +135,7 @@ kobotools_data_list_kc<- function(url="kc.humanitarianresponse.info", user.id=ge
 #' @export
 
 
-kobotools_kc_download<- function(assetid=NULL, url="kc.humanitarianresponse.info", user.id=get_kobo_id(), pass=get_kobo_pass()){
+kobotools_kc_download<- function(assetid=NULL, url="kc.humanitarianresponse.info", user.id="id", pass="password"){
 
   fullurl<-paste0("https://",url,"/api/v1/data/",assetid)
   userid<- user.id
@@ -355,7 +165,7 @@ kobotools_kc_download<- function(assetid=NULL, url="kc.humanitarianresponse.info
 #'
 #' @examples
 #' /notrun
-#' kobotools_kpi_data(assetid="12345", url="kobo.humanitarianresponse.info", forma="json")
+#' kobotools_kpi_data(assetid="12345", tokenvalue="tokenvalue")
 #'
 #' @seealso [kobotools_data_list_kc()]
 #'
@@ -364,7 +174,7 @@ kobotools_kc_download<- function(assetid=NULL, url="kc.humanitarianresponse.info
 #'
 #' @export
 
-kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", forma="json", tokenvalue=get_kobo_token()) {
+kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", forma="json", tokenvalue="tokenvalue") {
 
   fullurl<-paste0("https://",url,"/api/v2/assets/",assetid,"/data.",forma)
   auth.token<-paste0("Token ",tokenvalue)

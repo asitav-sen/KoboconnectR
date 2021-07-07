@@ -8,7 +8,7 @@ kobotools_kpi_data(
   assetid,
   url = "kobo.humanitarianresponse.info",
   forma = "json",
-  tokenvalue = get_kobo_token()
+  tokenvalue = "tokenvalue"
 )
 }
 \arguments{
@@ -33,7 +33,7 @@ extract the stored token value from the Renviron.
 }
 \examples{
 /notrun
-kobotools_kpi_data(assetid="12345", url="kobo.humanitarianresponse.info", forma="json")
+kobotools_kpi_data(assetid="12345", tokenvalue="tokenvalue")
 
 }
 \seealso{

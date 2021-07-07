@@ -7,7 +7,7 @@
 kobotools_api(
   url = "kobo.humanitarianresponse.info",
   simplified = F,
-  kobo.token = get_kobo_token()
+  kobo.token = NULL
 )
 }
 \arguments{
@@ -24,16 +24,8 @@ The function returns the asset details from the API, inform of a data frame or j
 `kobotools_api` is a wrapper for kobotools API `https://[kpi-url]/api/v2/assets.json`
 }
 \details{
-The function takes two variables. First one is `url` which is the `[kpi-url]`. FOr most users it will be "kobo.humanitarianresponse.info" or
+The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "kobo.humanitarianresponse.info" or
 "kf.kobotoolbox.org". Former is the default. THe second parameter is `simplified` which takes a logical value. If set to true,
 the function will return selected values from the parsed data and return a data frame. WHen set to false, a json will be reurned with
 all the details. Token needs to be set before the function can be used.
-}
-\examples{
-kobotools_api()
-kobotools_api(url="kobo.humanitarianresponse.info", simplified=T)
-
-}
-\seealso{
-[set_kobo_token()]
 }

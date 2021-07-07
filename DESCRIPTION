@@ -1,8 +1,8 @@
 Package: KoboconnectR
 Type: Package
 Title: Wrapper for Kobotools APIs, primarily to extract submitted data
-URL: https://asitav-sen/koboconnect/
-BugReports: https://github.com/asitav-sen/koboconnect/issues
+URL: https://asitav-sen/koboconnectR/
+BugReports: https://github.com/asitav-sen/koboconnectR/issues
 Version: 0.1.0
 Authors@R: person("Asitav ", "Sen", email = "7u90fioq2@relay.firefox.com",
                   role = c("aut", "cre","cph"))
@@ -13,8 +13,5 @@ LazyData: true
 RoxygenNote: 7.1.1
 Imports:
     httr,
-    jsonlite,
-    safer
+    jsonlite
 Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
