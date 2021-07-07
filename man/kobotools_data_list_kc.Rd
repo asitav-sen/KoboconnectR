@@ -30,11 +30,6 @@ An alternative way to use the `kpi` and v2 is to use  [kobotools_data_list_kpi()
 find out the link to the submitted data files. In this function the returned `id` from the asset list is particularly
 important which will be used in [kobotools_kc_download()] to download csv files.
 }
-\examples{
-/notrun
-kobotools_data_list_kc("kc.humanitarianresponse.info", user.id="id", pass="password")
-
-}
 \seealso{
 [kobotools_kc_download()]
 }

@@ -31,11 +31,6 @@ The function takes the `kpi` url as one of the inputs. And assetid as another. B
 the [kobotools_api()] function. Another parameter `tokenvalue` takes string as a value. One can use [get_kobo_token()] to
 extract the stored token value from the Renviron.
 }
-\examples{
-/notrun
-kobotools_kpi_data(assetid="12345", tokenvalue="tokenvalue")
-
-}
 \seealso{
 [kobotools_data_list_kc()]
 }

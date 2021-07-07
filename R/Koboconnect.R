@@ -19,9 +19,6 @@ library(tidyverse)
 #' @param kobo.token a string (the token value)
 #' @return The function returns the asset details from the API, inform of a data frame or json.
 #'
-#' @examples
-#' /notrun
-#' kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, token="token)
 #'
 #'
 #' @importFrom httr GET add_headers content
@@ -84,9 +81,6 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kob
 #' @param pass takes the password as string
 #' @return The function returns the list of assets/projects in kobotools, in form of a json.
 #'
-#' @examples
-#' /notrun
-#' kobotools_data_list_kc("kc.humanitarianresponse.info", user.id="id", pass="password")
 #'
 #' @seealso [kobotools_kc_download()]
 #'
@@ -121,10 +115,6 @@ kobotools_data_list_kc<- function(url="kc.humanitarianresponse.info", user.id="i
 #' @param user.id takes the user id in string
 #' @param pass takes the password as string
 #' @return The function returns the data
-#'
-#' @examples
-#'/notrun
-#' kobotools_kc_download(assetid="12345", user.id="id", pass="password")
 #'
 #' @seealso [kobotools_data_list_kc()]
 #'
@@ -163,9 +153,6 @@ kobotools_kc_download<- function(assetid=NULL, url="kc.humanitarianresponse.info
 #'
 #' @return The function returns the data
 #'
-#' @examples
-#' /notrun
-#' kobotools_kpi_data(assetid="12345", tokenvalue="tokenvalue")
 #'
 #' @seealso [kobotools_data_list_kc()]
 #'

@@ -24,6 +24,9 @@ devtools::install_github("asitav-sen/KoboconnectR")
 
 ## Getting started
 
+**These functions have been removed because of their dependency on
+Renviron. Use the functions in Extracting data section**
+
 Before being able to use the kobotools API, one needs the API token and
 in some cases the user id and password. The [kobotools
 documentation](https://support.kobotoolbox.org/api.html) lists multiple

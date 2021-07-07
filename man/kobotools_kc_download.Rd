@@ -30,11 +30,6 @@ The function returns the data
 The function takes the `kc` url as one of the inputs. And assetid as another. Both are strings. The asset id is found by running
 the [kobotools_data_list_kc()] function.
 }
-\examples{
-/notrun
-kobotools_kc_download(assetid="12345", user.id="id", pass="password")
-
-}
 \seealso{
 [kobotools_data_list_kc()]
 }
