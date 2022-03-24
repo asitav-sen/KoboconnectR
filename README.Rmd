@@ -34,7 +34,7 @@ devtools::install_github("asitav-sen/KoboconnectR")
 ## Getting started
 
 
-Before being able to use the kobotoolbox API, one needs to set up API token. The [kobotools documentation](https://support.kobotoolbox.org/api.html) lists multiple ways for one to extract the token value. If there is a token, the easiest way to retrieve it is by using `get_kobo_token` function.
+Before being able to use the kobotoolbox API, one needs to set up API token. The [kobotoolbox documentation](https://support.kobotoolbox.org/api.html) lists multiple ways for one to extract the token value. If there is a token, the easiest way to retrieve it is by using `get_kobo_token` function.
 
 For details, check the vignette.
 
