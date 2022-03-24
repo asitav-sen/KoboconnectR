@@ -1,12 +1,12 @@
 Package: KoboconnectR
 Type: Package
-Title: Wrapper for Kobotools APIs, primarily to extract submitted data
-URL: https://asitav-sen/koboconnectR/
+Title: Download Data from Kobotoolbox to R
+URL: https://github.com/asitav-sen/KoboconnectR
 BugReports: https://github.com/asitav-sen/koboconnectR/issues
 Version: 1.0.0
-Authors@R: person("Asitav ", "Sen", email = "7u90fioq2@relay.firefox.com",
+Authors@R: person("Asitav ", "Sen", email = "hello@asitavsen.com",
                   role = c("aut", "cre","cph"))
-Description: Wrapper for Kobotools APIs to download data from Kobotools to R.
+Description: Wrapper for Kobotools APIs (ver 2) to download data from Kobotoolbox to R. Small and simple package that adds immense convenience for the data professionals using Kobotoolbox.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -20,5 +20,10 @@ Imports:
     R6,
     methods
 Suggests: 
+    knitr,
+    rmarkdown,
+    spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Language: en-US
+VignetteBuilder: knitr

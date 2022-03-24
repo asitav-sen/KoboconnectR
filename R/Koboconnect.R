@@ -5,13 +5,14 @@
 #'
 #'@details
 #' The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "kobo.humanitarianresponse.info" or
-#' "kf.kobotoolbox.org". Former is the default. THe second parameter is `simplified` which takes a logical value. If set to true,
-#' the function will return selected values from the parsed data and return a data frame. WHen set to false, a json will be reurned with
-#' all the details. Token needs to be set before the function can be used.
+#' "kf.kobotoolbox.org". Former is the default. The second parameter is `simplified` which takes a logical value. If set to true,
+#' the function will return selected values from the parsed data and return a data frame. When set to false, a json will be returned with
+#' all the details.
 #'
 #' @param url The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"
-#' @param simplified A logical value, default is false
-#' @param kobo.token a string (the token value)
+#' @param simplified A logical value, default is true
+#' @param uname takes the username
+#' @param pwd takes the password
 #' @return The function returns the asset details from the API, inform of a data frame or json.
 #'
 #'
@@ -21,11 +22,22 @@
 #'
 #' @export
 
-kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kobo.token=NULL) {
+kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=T, uname="scary_scarecrow", pwd="sybWE6USkFxDsr4") {
+
+
+  if(!is.character(url)) stop("URL entered is not a string")
+  if(!is.character(uname)) stop("uname (username) entered is not a string")
+  if(!is.character(pwd)) stop("pwd (password) entered is not a string")
+  if(is.null(url)) stop("URL empty")
+  if(is.null(uname)) stop("uname (username) empty")
+  if(is.null(pwd)) stop("pwd (password) empty")
+  if(!is.logical(simplified)) stop("simplied can take only logical value")
 
   fullurl<-paste0("https://",url,"/api/v2/assets.json")
-  auth.token<-paste0("Token ",kobo.token)
-  respon<-GET(fullurl, add_headers(.headers=c(Authorization=auth.token)), user.agent)
+  respon<-GET(fullurl, authenticate(uname, pwd))
+
+  if(respon$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon$status_code))
+
   parsed <- fromJSON(content(respon, "text"), simplifyVector = FALSE)
 
   if(simplified==F){
@@ -59,115 +71,82 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=F, kob
 
 
 
-#' Lists available data in your kobotool
+#' Extract data from kobotools
 #'
 #'@description
-#' `kobotools_data_list_kc` is a wrapper for kobotools API `https://kc.humanitarianresponse.info/api/v1/data`
+#' `kobotools_kpi_data` is a wrapper for kobotools API `https://[URL]/api/v2/assets/{assetid}/data/`
 #'
 #'@details
-#' The function takes the `kc` url as the input. It retrieves the user id and password set using `set_kobo_id_pass`.
-#' This function uses the old api (v1) of kobotools. Similar version of v2 and `kpi` was not found in the documentation yet.
-#' An alternative way to use the `kpi` and v2 is to use  [kobotools_data_list_kpi()]. The utility of both these function is to
-#' find out the link to the submitted data files. In this function the returned `id` from the asset list is particularly
-#' important which will be used in [kobotools_kc_download()] to download csv files.
+#' The function takes the url as one of the inputs. And asset id as another. Both are strings. The asset id is found by running
+#' the [kobotools_api()] function.Other parameters are username and password.
 #'
-#' @param url The `[kc-url]` of kobotools. Default is "kc.humanitarianresponse.info"
-#' @param user.id takes the user id in string
-#' @param pass takes the password as string
-#' @return The function returns the list of assets/projects in kobotools, in form of a json.
-#'
-#'
-#' @seealso [kobotools_kc_download()]
-#'
-#' @importFrom httr GET content authenticate
-#' @importFrom jsonlite fromJSON
-#'
-#' @export
-
-
-kobotools_data_list_kc<- function(url="kc.humanitarianresponse.info", user.id="id", pass="password") {
-  fullurl<-paste0("https://",url,"/api/v1/data?format=json")
-  userid<- user.id
-  password<- pass
-  respon<-GET(fullurl, authenticate(userid,password),user.agent)
-  dt<-fromJSON(content(respon, "text"), simplifyVector = FALSE)
-  dt
-
-}
-
-
-#' Download data from kobotools
-#'
-#'@description
-#' `kobotools_kc_download` is a wrapper for kobotools API `https://kc.humanitarianresponse.info/api/v1/data/[assetid]`
-#'
-#'@details
-#' The function takes the `kc` url as one of the inputs. And assetid as another. Both are strings. The asset id is found by running
-#' the [kobotools_data_list_kc()] function.
-#'
-#' @param url The `[kc-url]` of kobotools. Default is "kc.humanitarianresponse.info"
+#' @param url The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"
 #' @param assetid is the asset id of the asset for which the data is to be downloaded. The id can be found by running [kobotools_data_list_kc()]
-#' @param user.id takes the user id in string
-#' @param pass takes the password as string
+#' @param uname is username of your kobotool account
+#' @param pwd is the password of the account
+#'
 #' @return The function returns the data
 #'
-#' @seealso [kobotools_data_list_kc()]
 #'
 #' @importFrom httr GET content authenticate
 #' @importFrom jsonlite fromJSON
-#' @importFrom utils read.csv
 #'
 #' @export
 
+kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", uname="", pwd="") {
 
-kobotools_kc_download<- function(assetid=NULL, url="kc.humanitarianresponse.info", user.id="id", pass="password"){
+  if(!is.character(url)) stop("URL entered is not a string")
+  if(!is.character(uname)) stop("uname (username) entered is not a string")
+  if(!is.character(pwd)) stop("pwd (password) entered is not a string")
+  if(!is.character(assetid)) stop("assetid entered in not string")
+  if(is.null(url)) stop("URL empty")
+  if(is.null(uname)) stop("uname (username) empty")
+  if(is.null(pwd)) stop("pwd (password) empty")
+  if(is.null(assetid)) stop("assetid empty")
 
-  fullurl<-paste0("https://",url,"/api/v1/data/",assetid)
-  userid<- user.id
-  password<- pass
-  respon<-GET(fullurl, authenticate(userid,password), query=list(key="format",value="csv"),user.agent)
-  dt<-fromJSON(content(respon,"text"))
+
+  fullurl<-paste0("https://",url,"/api/v2/assets/",assetid,"/data/")
+  respon<-GET(fullurl, authenticate(uname, pwd))
+  if(respon$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon$status_code))
+  dt<-content(respon)
   dt
-
 }
 
 #' Extract data from kobotools
 #'
 #'@description
-#' `kobotools_kpi_data` is a wrapper for kobotools API `https://restoreprivacy.com/linkedin-data-leak-700-million-users/`
+#' `get_kobo_token` is a wrapper for kobotools API `https://"[url]"/token/?format=json`
 #'
 #'@details
-#' The function takes the `kpi` url as one of the inputs. And assetid as another. Both are strings. The asset id is found by running
-#' the [kobotools_api()] function. Another parameter `tokenvalue` takes string as a value. One can use [get_kobo_token()] to
-#' extract the stored token value from the Renviron.
+#' The function returns the API token.
 #'
-#' @param url The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"
-#' @param assetid is the asset id of the asset for which the data is to be downloaded. The id can be found by running [kobotools_data_list_kc()]
-#' @param forma is a string defining the format of data. Default is "json"
-#' @param tokenvalue is a the value of the kobotools API token
+#' @param url The `[url]` of kobotools. Default is "kobo.humanitarianresponse.info".
+#' @param uname is username of your kobotool account
+#' @param pwd is the password of the account
 #'
-#' @return The function returns the data
+#' @return The function returns the token associated with your id and password in the given url.
 #'
-#'
-#' @seealso [kobotools_data_list_kc()]
 #'
 #' @importFrom httr GET content authenticate
 #' @importFrom jsonlite fromJSON
 #'
 #' @export
 
-kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", forma="json", tokenvalue="tokenvalue") {
+get_kobo_token <- function(url="kobo.humanitarianresponse.info", uname="", pwd=""){
 
-  fullurl<-paste0("https://",url,"/api/v2/assets/",assetid,"/data.",forma)
-  auth.token<-paste0("Token ",tokenvalue)
-  respon<-GET(fullurl, add_headers(.headers=c(Authorization=auth.token)),user.agent)
-  dt<-content(respon)
-  dt
+  if(!is.character(url)) stop("URL entered is not a string")
+  if(!is.character(uname)) stop("uname (username) entered is not a string")
+  if(!is.character(pwd)) stop("pwd (password) entered is not a string")
+  if(is.null(url)) stop("URL empty")
+  if(is.null(uname)) stop("uname (username) empty")
+  if(is.null(pwd)) stop("pwd (password) empty")
+
+  fullurl<-paste0("https://",url,"/token/?format=json")
+  respon<-GET(fullurl, authenticate(uname, pwd))
+  if(respon$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon$status_code))
+  tkn<-fromJSON(content(respon,"text"))
+  tkn
 }
-
-
-
-
 
 
 

@@ -6,16 +6,19 @@
 \usage{
 kobotools_api(
   url = "kobo.humanitarianresponse.info",
-  simplified = F,
-  kobo.token = NULL
+  simplified = T,
+  uname = "scary_scarecrow",
+  pwd = "sybWE6USkFxDsr4"
 )
 }
 \arguments{
 \item{url}{The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"}
 
-\item{simplified}{A logical value, default is false}
+\item{simplified}{A logical value, default is true}
 
-\item{kobo.token}{a string (the token value)}
+\item{uname}{takes the username}
+
+\item{pwd}{takes the password}
 }
 \value{
 The function returns the asset details from the API, inform of a data frame or json.
@@ -25,7 +28,7 @@ The function returns the asset details from the API, inform of a data frame or j
 }
 \details{
 The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "kobo.humanitarianresponse.info" or
-"kf.kobotoolbox.org". Former is the default. THe second parameter is `simplified` which takes a logical value. If set to true,
-the function will return selected values from the parsed data and return a data frame. WHen set to false, a json will be reurned with
-all the details. Token needs to be set before the function can be used.
+"kf.kobotoolbox.org". Former is the default. The second parameter is `simplified` which takes a logical value. If set to true,
+the function will return selected values from the parsed data and return a data frame. When set to false, a json will be returned with
+all the details.
 }

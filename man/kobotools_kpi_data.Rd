@@ -7,8 +7,8 @@
 kobotools_kpi_data(
   assetid,
   url = "kobo.humanitarianresponse.info",
-  forma = "json",
-  tokenvalue = "tokenvalue"
+  uname = "",
+  pwd = ""
 )
 }
 \arguments{
@@ -16,21 +16,17 @@ kobotools_kpi_data(
 
 \item{url}{The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"}
 
-\item{forma}{is a string defining the format of data. Default is "json"}
+\item{uname}{is username of your kobotool account}
 
-\item{tokenvalue}{is a the value of the kobotools API token}
+\item{pwd}{is the password of the account}
 }
 \value{
 The function returns the data
 }
 \description{
-`kobotools_kpi_data` is a wrapper for kobotools API `https://restoreprivacy.com/linkedin-data-leak-700-million-users/`
+`kobotools_kpi_data` is a wrapper for kobotools API `https://[URL]/api/v2/assets/{assetid}/data/`
 }
 \details{
-The function takes the `kpi` url as one of the inputs. And assetid as another. Both are strings. The asset id is found by running
-the [kobotools_api()] function. Another parameter `tokenvalue` takes string as a value. One can use [get_kobo_token()] to
-extract the stored token value from the Renviron.
-}
-\seealso{
-[kobotools_data_list_kc()]
+The function takes the url as one of the inputs. And asset id as another. Both are strings. The asset id is found by running
+the [kobotools_api()] function.Other parameters are username and password.
 }

@@ -4,3 +4,4 @@
 ^LICENSE
 ^README\.Rmd$
 ^depreciated.R
+^cran-comments\.md$
