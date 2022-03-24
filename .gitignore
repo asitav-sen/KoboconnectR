@@ -3,3 +3,9 @@
 .RData
 .Ruserdata
 inst/doc
+cran-comments.md
+.Rbuildignore
+.gitattributes
+.DS_Store
+LICENSE
+README.Rmd
