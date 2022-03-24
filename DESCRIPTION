@@ -6,7 +6,7 @@ BugReports: https://github.com/asitav-sen/koboconnectR/issues
 Version: 1.0.0
 Authors@R: person("Asitav ", "Sen", email = "hello@asitavsen.com",
                   role = c("aut", "cre","cph"))
-Description: Wrapper for Kobotools APIs (ver 2) to download data from Kobotoolbox to R. Small and simple package that adds immense convenience for the data professionals using Kobotoolbox.
+Description: Wrapper for 'Kobotoolbox' APIs (ver 2) to download data from 'Kobotoolbox' to R. Small and simple package that adds immense convenience for the data professionals using 'Kobotoolbox'.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

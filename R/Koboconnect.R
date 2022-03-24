@@ -19,6 +19,12 @@
 #'
 #' @importFrom httr GET add_headers content
 #' @importFrom jsonlite fromJSON
+#' @import R6
+#' @import curl
+#' @import methods
+#' @import mime
+#' @import openssl
+#'
 #'
 #' @export
 
@@ -90,6 +96,8 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=T, una
 #'
 #' @importFrom httr GET content authenticate
 #' @importFrom jsonlite fromJSON
+#'
+#'
 #'
 #' @export
 

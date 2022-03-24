@@ -47,17 +47,10 @@ Please feel free to add issue of suggestions in
 
 The following packages are required to install and run this package.
 
-1.  Package
-    [`httr`](https://cran.r-project.org/web/packages/httr/index.html)
-2.  Package
-    [`jsonlite`](https://cran.r-project.org/web/packages/jsonlite/index.html)
-3.  Package
-    [`curl`](https://cran.r-project.org/web/packages/curl/index.html)
-4.  Package
-    [`mime`](https://cran.r-project.org/web/packages/mime/index.html)
-5.  Package
-    [`openssl`](https://cran.r-project.org/web/packages/openssl/index.html)
-6.  Package
-    [`R6`](https://cran.r-project.org/web/packages/R6/index.html)
-7.  Package
-    [`methods`](https://cran.r-project.org/web/packages/methods/index.html)
+1.  Package [`httr`](https://cran.r-project.org/package=httr)
+2.  Package [`jsonlite`](https://cran.r-project.org/package=jsonlite)
+3.  Package [`curl`](https://cran.r-project.org/package=curl)
+4.  Package [`mime`](https://cran.r-project.org/package=mime)
+5.  Package [`openssl`](https://cran.r-project.org/package=openssl)
+6.  Package [`R6`](https://cran.r-project.org/package=R6)
+7.  Package [`methods`](https://cran.r-project.org/package=methods)

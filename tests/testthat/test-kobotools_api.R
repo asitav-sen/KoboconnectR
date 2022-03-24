@@ -22,3 +22,12 @@ test_that("username non string conditions works", {
 test_that("password non string conditions works", {
   expect_error(kobotools_api(pwd=1234))
 })
+
+test_that("df is downloaded when simplification applied", {
+  expect_true(is.data.frame(kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="scary_scarecrow", pwd="sybWE6USkFxDsr4")))
+})
+
+test_that("list is downloaded when simplification not applied", {
+  expect_true(is.list(kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="scary_scarecrow", pwd="sybWE6USkFxDsr4")))
+})
+

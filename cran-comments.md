@@ -7,4 +7,5 @@ There was no error during the tests
 R CMD check succeeded
 
 * This is the first release for CRAN
-* I have not included tests which depend on providing authentication details and/or need private URLs to work
+* I have not included tests or examples which depend on providing authentication details and/or need private URLs to work
+* There are currently no downstream dependencies for this package
