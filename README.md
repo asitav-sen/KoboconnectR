@@ -10,7 +10,8 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 <!-- badges: end -->
 
 The goal of KoboconnectR is to facilitate data extraction from
-Kobotoolbox projects/assets into R.
+Kobotoolbox projects/assets into R, instead of downloading the
+individual spreadsheet files.
 
 ## Installation
 
@@ -30,7 +31,18 @@ documentation](https://support.kobotoolbox.org/api.html) lists multiple
 ways for one to extract the token value. If there is a token, the
 easiest way to retrieve it is by using `get_kobo_token` function.
 
-For details, check the vignette.
+``` r
+kobotools_kpi_data(assetid= "assetid", url="kobo.humanitarianresponse.info", uname="username", pwd="password")
+```
+
+To find the asset id, one can use the `kobotools_api` function that
+returns a list of assets the user has access to.
+
+``` r
+kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="userid", pwd="password")
+```
+
+For further details, check the vignette.
 
 ## Contribution
 
@@ -53,4 +65,4 @@ The following packages are required to install and run this package.
 4.  Package [`mime`](https://cran.r-project.org/package=mime)
 5.  Package [`openssl`](https://cran.r-project.org/package=openssl)
 6.  Package [`R6`](https://cran.r-project.org/package=R6)
-7.  Package [`methods`](https://cran.r-project.org/package=methods)
+7.  Package `methods`

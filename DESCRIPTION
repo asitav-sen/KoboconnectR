@@ -18,7 +18,8 @@ Imports:
     mime,
     openssl,
     R6,
-    methods
+    methods,
+    dplyr
 Suggests: 
     knitr,
     rmarkdown,

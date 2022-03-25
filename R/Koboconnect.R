@@ -24,6 +24,7 @@
 #' @import methods
 #' @import mime
 #' @import openssl
+#' @import dplyr
 #'
 #'
 #' @export

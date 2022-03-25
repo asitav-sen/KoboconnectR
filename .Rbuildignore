@@ -5,3 +5,4 @@
 ^README\.Rmd$
 ^depreciated.R
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

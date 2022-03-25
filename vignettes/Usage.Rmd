@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(KoboconnectR)
+library(dplyr)
 ```
 
 
@@ -52,7 +53,7 @@ The output will be similar to the following if `simplified =T` is used in the `k
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
-kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="scary_scarecrow", pwd="sybWE6USkFxDsr4") |> knitr::kable()
+kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="scary_scarecrow", pwd="sybWE6USkFxDsr4") |> select(-URL) |>  knitr::kable()
 ```
 
 
@@ -78,7 +79,7 @@ This returns a list from json file. Main data is usually inside `results`.
 Following shows the summary of the list downloaded from one `kobotools_kpi_data` query.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
-kobotools_kpi_data(assetid= "akANpTUN6aB4wXADscfRSy", url="kobo.humanitarianresponse.info", uname="scary_scarecrow", pwd="sybWE6USkFxDsr4") |> summary()
+kobotools_kpi_data(assetid= "akANpTUN6aB4wXADscfRSy", url="kobo.humanitarianresponse.info", uname="scary_scarecrow", pwd="sybWE6USkFxDsr4")
 ```
 
 
