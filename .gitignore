@@ -9,4 +9,4 @@ cran-comments.md
 .DS_Store
 LICENSE
 README.Rmd
-tests
+tests/
