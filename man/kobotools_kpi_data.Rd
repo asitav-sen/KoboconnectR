@@ -2,29 +2,32 @@
 % Please edit documentation in R/Koboconnect.R
 \name{kobotools_kpi_data}
 \alias{kobotools_kpi_data}
-\title{Extract data from kobotools}
+\title{Extract data from kobotoolbox}
 \usage{
 kobotools_kpi_data(
   assetid,
   url = "kobo.humanitarianresponse.info",
   uname = "",
-  pwd = ""
+  pwd = "",
+  encoding = "UTF-8"
 )
 }
 \arguments{
 \item{assetid}{is the asset id of the asset for which the data is to be downloaded. The id can be found by running [kobotools_data_list_kc()]}
 
-\item{url}{The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"}
+\item{url}{The `[kpi-url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info"}
 
-\item{uname}{is username of your kobotool account}
+\item{uname}{is username of your kobotoolbox account}
 
 \item{pwd}{is the password of the account}
+
+\item{encoding}{is the encoding to be used. Default is "UTF-8".}
 }
 \value{
 The function returns the data
 }
 \description{
-`kobotools_kpi_data` is a wrapper for kobotools API `https://[URL]/api/v2/assets/{assetid}/data/`
+`kobotools_kpi_data` is a wrapper for kobotoolbox API `https://[URL]/api/v2/assets/{assetid}/data/`
 }
 \details{
 The function takes the url as one of the inputs. And asset id as another. Both are strings. The asset id is found by running

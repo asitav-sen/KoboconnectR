@@ -2,29 +2,32 @@
 % Please edit documentation in R/Koboconnect.R
 \name{kobotools_api}
 \alias{kobotools_api}
-\title{Check kobotools API and retrieve overall info about the projects/assets}
+\title{Check kobotoolbox API and retrieve overall info about the projects/assets}
 \usage{
 kobotools_api(
   url = "kobo.humanitarianresponse.info",
-  simplified = T,
-  uname = "scary_scarecrow",
-  pwd = "sybWE6USkFxDsr4"
+  simplified = TRUE,
+  uname = "",
+  pwd = "",
+  encoding = "UTF-8"
 )
 }
 \arguments{
-\item{url}{The `[kpi-url]` of kobotools. Default is "kobo.humanitarianresponse.info"}
+\item{url}{The `[kpi-url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info"}
 
 \item{simplified}{A logical value, default is true}
 
 \item{uname}{takes the username}
 
 \item{pwd}{takes the password}
+
+\item{encoding}{is the encoding to be used. Default is "UTF-8".}
 }
 \value{
 The function returns the asset details from the API, inform of a data frame or json.
 }
 \description{
-`kobotools_api` is a wrapper for kobotools API `https://[kpi-url]/api/v2/assets.json`
+`kobotools_api` is a wrapper for kobotoolbox API `https://[kpi-url]/api/v2/assets.json`
 }
 \details{
 The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "kobo.humanitarianresponse.info" or
