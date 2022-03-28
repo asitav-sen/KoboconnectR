@@ -1,0 +1,90 @@
+---
+title: "Usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(KoboconnectR)
+library(dplyr)
+```
+
+
+## Check if you have API token from Kobotoolbox
+
+
+
+```{r eval=FALSE, include=TRUE}
+library(KoboconnectR)
+get_kobo_token(url="kobo.humanitarianresponse.info", uname="userid", pwd="password")
+```
+
+
+The output is usually like this
+
+`
+No encoding supplied: defaulting to UTF-8.
+$token
+[1] "nask976bdshuiqw9829nsh718"
+`
+
+## Extracting data
+
+Extracting data is two step process. Step one is to identify the asset id. And next is to use the asset id to extract the data.
+
+### Check the assets you have access to
+
+
+```{r echo=TRUE, eval=FALSE, include=TRUE}
+kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="userid", pwd="password")
+```
+
+The output will be similar to the following if `simplified =T` is used in the `kobotools_api` function.
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="scary_scarecrow", pwd="sybWE6USkFxDsr4") |> select(-URL) |>  knitr::kable()
+```
+
+
+
+
+From the data frame, you can find the asset id you need ((under the column `asset`)). 
+
+
+### Extract the data
+
+
+Use the asset id and plug in to the `kobotools_kpi_data` function to download the data.
+
+
+```{r eval=FALSE, include=TRUE}
+kobotools_kpi_data(assetid= "assetid", url="kobo.humanitarianresponse.info", uname="username", pwd="password")
+```
+
+
+
+This returns a list from json file. Main data is usually inside `results`.
+
+Following shows the summary of the list downloaded from one `kobotools_kpi_data` query.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+kobotools_kpi_data(assetid= "akANpTUN6aB4wXADscfRSy", url="kobo.humanitarianresponse.info", uname="scary_scarecrow", pwd="sybWE6USkFxDsr4")
+```
+
+
+
+## Issues and Suggestions
+
+Please feel free to add issue of suggestions in [github](https://github.com/asitav-sen/KoboconnectR/issues)
+
