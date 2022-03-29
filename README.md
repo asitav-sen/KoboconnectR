@@ -7,6 +7,8 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/KoboconnectR)](https://CRAN.R-project.org/package=KoboconnectR)
 <!-- badges: end -->
 
 The goal of KoboconnectR is to facilitate data extraction from

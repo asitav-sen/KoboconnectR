@@ -108,6 +108,8 @@ kobo_export_create(url="kobo.humanitarianresponse.info", uname="", pwd="",
 
 On successful execution, the URL of the created export will be returned and printed. You can use this URL to download, import or read data in R.
 
+Find dummy example of [how to create export and download csv from Kobotoolbox to R here](https://blog.asitavsen.com/post/how-to-download-kobotoolbox-data-in-r/)
+
 ## Issues and Suggestions
 
 Please feel free to add issue of suggestions in [github](https://github.com/asitav-sen/KoboconnectR/issues)
