@@ -17,6 +17,12 @@ individual spreadsheet files.
 
 ## Installation
 
+CRAN version can be downloaded with:
+
+``` r
+install.packages("KoboconnectR") 
+```
+
 The effort is still in its early stage. The development version can be
 installed from [GitHub](https://github.com/) with:
 
@@ -31,13 +37,13 @@ Before being able to use the kobotoolbox API, one needs to set up API
 token. The [kobotoolbox
 documentation](https://support.kobotoolbox.org/api.html) lists multiple
 ways for one to extract the token value. If there is a token, the
-easiest way to retrieve it is by using `get_kobo_token` function.
+easiest way to retrieve it is by using `get_kobo_token()` function.
 
 ``` r
 kobotools_kpi_data(assetid= "assetid", url="kobo.humanitarianresponse.info", uname="username", pwd="password")
 ```
 
-To find the asset id, one can use the `kobotools_api` function that
+To find the asset id, one can use the `kobotools_api()` function that
 returns a list of assets the user has access to.
 
 ``` r
