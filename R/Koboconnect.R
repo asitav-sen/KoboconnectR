@@ -43,11 +43,11 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=TRUE, 
   if(!is.logical(simplified)) stop("simplied can take only logical value")
 
   fullurl<-paste0("https://",url,"/api/v2/assets.json")
-  respon<-GET(fullurl, authenticate(uname, pwd), progress())
+  respon.api<-GET(fullurl, authenticate(uname, pwd), progress())
 
-  if(respon$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon$status_code))
+  if(respon.api$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon.api$status_code))
 
-  parsed <- fromJSON(content(respon, "text", encoding = encoding), simplifyVector = FALSE)
+  parsed <- fromJSON(content(respon.api, "text", encoding = encoding), simplifyVector = FALSE)
 
   if(simplified==FALSE){
     return(parsed)
@@ -118,10 +118,10 @@ kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", unam
 
 
   fullurl<-paste0("https://",url,"/api/v2/assets/",assetid,"/data/")
-  respon<-GET(fullurl, authenticate(uname, pwd), progress())
-  if(respon$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon$status_code))
-  dt<-content(respon, encoding = encoding)
-  dt
+  respon.kpi<-GET(fullurl, authenticate(uname, pwd), progress())
+  if(respon.kpi$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon.kpi$status_code))
+  dt<-content(respon.kpi, encoding = encoding)
+  return(dt)
 }
 
 #' Know your API token or check
@@ -155,10 +155,10 @@ get_kobo_token <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
   if(is.null(pwd)) stop("pwd (password) empty")
 
   fullurl<-paste0("https://",url,"/token/?format=json")
-  respon<-GET(fullurl, authenticate(uname, pwd), progress())
-  if(respon$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon$status_code))
-  tkn<-fromJSON(content(respon,"text", encoding = encoding))
-  tkn
+  respon.token<-GET(fullurl, authenticate(uname, pwd), progress())
+  if(respon.token$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon.token$status_code))
+  tkn<-fromJSON(content(respon.token,"text", encoding = encoding))
+  return(tkn)
 }
 
 
@@ -193,10 +193,10 @@ kobo_exports <- function(url="kobo.humanitarianresponse.info", uname="", pwd="",
   if(is.null(pwd)) stop("pwd (password) empty")
 
   fullurl<-paste0("https://",url,"/exports/")
-  respon<-GET(fullurl, authenticate(uname, pwd), progress())
-  if(respon$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon$status_code))
-  exports<-fromJSON(content(respon,"text", encoding = encoding))
-  exports
+  respon.exp<-GET(fullurl, authenticate(uname, pwd), progress())
+  if(respon.exp$status_code!=200) stop(paste0("Error in GET response. Expected 200, recieved ",respon.exp$status_code))
+  exports<-fromJSON(content(respon.exp,"text", encoding = encoding))
+  return(exports)
 }
 
 
@@ -212,10 +212,10 @@ kobo_exports <- function(url="kobo.humanitarianresponse.info", uname="", pwd="",
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
 #' @param assetid is the id of the asset for which the export is to be created
-#' @param type is the type of export to be created. For e.g. "xls", "csv" or "geojson".
+#' @param type is the type of export to be created. For e.g. 'xls' or 'csv'.
 #' @param all takes logical value in string format. "true" indicates the field from all versions of the asset to be used. Defaults to "false".
 #' @param lang takes the language. For e.g. "English (en)".
-#' @param heirarchy takes logical value in string format. "true" indicates hierarchy will be used in all labels. Default value is "false".
+#' @param hierarchy takes logical value in string format. "true" indicates hierarchy will be used in all labels. Default value is "false".
 #' @param grp_sep is the group separator. Default value is "/".
 #' @param include_grp defines whether or not to include groups. Default value is "true".
 #'
@@ -254,7 +254,7 @@ kobo_export_create <- function(url="kobo.humanitarianresponse.info", uname="", p
   if(is.null(grp_sep)) stop("grp_sep empty")
   if(is.null(include_grp)) stop("include_grp empty")
 
-  pre_export<-kobo_exports(url=url, uname=uname, pwd=pwd)
+  pre_export<- kobo_exports(url=url, uname=uname, pwd=pwd)
   pre_count<-as.integer(pre_export$count)
 
   fullurl<-paste0("https://",url,"/exports/")
@@ -266,7 +266,7 @@ kobo_export_create <- function(url="kobo.humanitarianresponse.info", uname="", p
                group_sep=grp_sep
              ),
              progress())
-  if(task$status_code!=201) stop(paste0("Error in GET response. Expected 201, recieved ",respon$status_code))
+  if(task$status_code!=201) stop(paste0("Error in GET response. Expected 201, recieved ",task$status_code))
 
   if(task$status_code==201) cat("Export instruction sent succesfully. Waiting for result. \n")
 
@@ -285,7 +285,6 @@ kobo_export_create <- function(url="kobo.humanitarianresponse.info", uname="", p
     stop(paste0("Did not execute. Encountered ",post_export$results$messages$error_type[post_count],". ",
            post_export$results$messages$error[post_count],". \n"))
   }
-
 
   print("Export successful")
   # print(post_count)

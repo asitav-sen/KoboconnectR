@@ -26,17 +26,17 @@ kobo_export_create(
 
 \item{assetid}{is the id of the asset for which the export is to be created}
 
-\item{type}{is the type of export to be created. For e.g. "xls", "csv" or "geojson".}
+\item{type}{is the type of export to be created. For e.g. 'xls' or 'csv'.}
 
 \item{all}{takes logical value in string format. "true" indicates the field from all versions of the asset to be used. Defaults to "false".}
 
 \item{lang}{takes the language. For e.g. "English (en)".}
 
+\item{hierarchy}{takes logical value in string format. "true" indicates hierarchy will be used in all labels. Default value is "false".}
+
 \item{include_grp}{defines whether or not to include groups. Default value is "true".}
 
 \item{grp_sep}{is the group separator. Default value is "/".}
-
-\item{heirarchy}{takes logical value in string format. "true" indicates hierarchy will be used in all labels. Default value is "false".}
 }
 \value{
 The function returns the token associated with your id and password in the given url.
@@ -45,5 +45,5 @@ The function returns the token associated with your id and password in the given
 `kobo_export_create` is a wrapper for kobotoolbox API `https://[url]/exports/..`
 }
 \details{
-The function creates an export of data. If successful, returns the URL of the data that can be directly downloaded/read/imported in R.
+The function creates an export of survey data. If successful, returns the URL of the data that can be directly downloaded/read/imported in R.
 }
