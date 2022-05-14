@@ -18,7 +18,8 @@ kobo_df_download(
   multi_sel = "both",
   media_url = "true",
   fields = NULL,
-  sub_ids = NULL
+  sub_ids = NULL,
+  sleep = 2
 )
 }
 \arguments{
@@ -53,6 +54,8 @@ An empty array which will result in all columns being included,
 If "fields" is not included in the "export_settings", all columns will be included in the export}
 
 \item{sub_ids}{is an array of submission ids that will filter exported submissions to only the specified array of ids. Valid inputs include an array containing integer values or an empty array.}
+
+\item{sleep}{is the sleep time between API actions. For example, it takes time to download an export. But R does not wait for the download to finish before going to next step. Hence the need to provide a break between consecutive API actions. Default value is 2 (seconds).}
 }
 \value{
 The function returns a data frame of data downloaded from 'Kobotoolbox'.
