@@ -1,3 +1,7 @@
+# KoboconnectR 1.1.0
+
+* New function `kobo_df_download` added, that enables direct download of csv file. A csv export is created and downloaded. Then the export is deleted.
+
 # KoboconnectR 1.0.0
 
 * Ver 1.0 done, with aim to submit the package in CRAN

@@ -21,7 +21,7 @@ kobo_exports(
 \item{encoding}{is the encoding to be used. Default is "UTF-8".}
 }
 \value{
-The function returns the token associated with your id and password in the given url.
+The function returns a list of exports available for the account id and password entered.
 }
 \description{
 `kobo_exports` is a wrapper for kobotoolbox API `https://[url]/exports/`

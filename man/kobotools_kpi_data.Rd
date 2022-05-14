@@ -24,7 +24,7 @@ kobotools_kpi_data(
 \item{encoding}{is the encoding to be used. Default is "UTF-8".}
 }
 \value{
-The function returns the data
+The function returns the data in json format
 }
 \description{
 `kobotools_kpi_data` is a wrapper for kobotoolbox API `https://[URL]/api/v2/assets/{assetid}/data/`
