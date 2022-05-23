@@ -20,7 +20,8 @@ kobo_export_create(
   media_url = "true",
   sub_ids = NULL,
   qry = NULL,
-  flatten = "true"
+  flatten = "true",
+  sleep = 2
 )
 }
 \arguments{
@@ -59,6 +60,8 @@ If "fields" is not included in the "export_settings", all columns will be includ
 a JSON object containing a valid Mongo query or An empty JSON object (no filtering)}
 
 \item{flatten}{is a is a boolean (in form of string) value and only relevant when exporting to "geojson" format. Valid inputs are "true" and "false"}
+
+\item{sleep}{is the sleep time between API actions. For example, it takes time to download an export. But R does not wait for the download to finish before going to next step. Hence the need to provide a break between consecutive API actions. Default value is 2 (seconds).}
 }
 \value{
 The function creates an export, prints and returns the URL of the export created

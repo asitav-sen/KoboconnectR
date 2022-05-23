@@ -19,7 +19,7 @@
 #'
 #'
 #'
-#' @importFrom httr GET add_headers content progress stop_for_status warn_for_status
+#' @importFrom httr GET add_headers content progress stop_for_status warn_for_status message_for_status timeout
 #' @importFrom jsonlite fromJSON
 #' @import R6
 #' @import curl
@@ -27,7 +27,6 @@
 #' @import mime
 #' @import openssl
 #' @import dplyr
-#'
 #'
 #' @export
 
@@ -37,9 +36,9 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=TRUE, 
   if(!is.character(url)) stop("URL entered is not a string")
   if(!is.character(uname)) stop("uname (username) entered is not a string")
   if(!is.character(pwd)) stop("pwd (password) entered is not a string")
-  if(is.null(url)) stop("URL empty")
-  if(is.null(uname)) stop("uname (username) empty")
-  if(is.null(pwd)) stop("pwd (password) empty")
+  if(is.null(url) | url=="") stop("URL empty")
+  if(is.null(uname) | uname=="") stop("uname (username) empty")
+  if(is.null(pwd) | pwd =="") stop("pwd (password) empty")
   if(!is.logical(simplified)) stop("simplied can take only logical value")
 
   fullurl<-paste0("https://",url,"/api/v2/assets.json")
@@ -74,6 +73,7 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=TRUE, 
                              date_created=date_created, date_modified=date_modified, URL=link)
     return(simp.parsed)
   }
+
 
 }
 
@@ -110,10 +110,10 @@ kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", unam
   if(!is.character(uname)) stop("uname (username) entered is not a string")
   if(!is.character(pwd)) stop("pwd (password) entered is not a string")
   if(!is.character(assetid)) stop("assetid entered in not string")
-  if(is.null(url)) stop("URL empty")
-  if(is.null(uname)) stop("uname (username) empty")
-  if(is.null(pwd)) stop("pwd (password) empty")
-  if(is.null(assetid)) stop("assetid empty")
+  if(is.null(url) | url=="") stop("URL empty")
+  if(is.null(uname) | uname=="") stop("uname (username) empty")
+  if(is.null(pwd) | pwd=="") stop("pwd (password) empty")
+  if(is.null(assetid) | assetid=="") stop("assetid empty")
 
 
   fullurl<-paste0("https://",url,"/api/v2/assets/",assetid,"/data/")
@@ -121,6 +121,7 @@ kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", unam
   stop_for_status(respon.kpi, "extract data")
   dt<-content(respon.kpi, encoding = encoding)
   return(dt)
+
 }
 
 #' Know your API token or check
@@ -150,15 +151,16 @@ get_kobo_token <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
   if(!is.character(url)) stop("URL entered is not a string")
   if(!is.character(uname)) stop("uname (username) entered is not a string")
   if(!is.character(pwd)) stop("pwd (password) entered is not a string")
-  if(is.null(url)) stop("URL empty")
-  if(is.null(uname)) stop("uname (username) empty")
-  if(is.null(pwd)) stop("pwd (password) empty")
+  if(is.null(url) | url=="") stop("URL empty")
+  if(is.null(uname) | uname=="") stop("uname (username) empty")
+  if(is.null(pwd) | pwd=="") stop("pwd (password) empty")
 
   fullurl<-paste0("https://",url,"/token/?format=json")
   respon.token<-GET(fullurl, authenticate(uname, pwd), progress())
   stop_for_status(respon.token,"extract token")
   tkn<-fromJSON(content(respon.token,"text", encoding = encoding))
   return(tkn)
+
 }
 
 
@@ -197,6 +199,7 @@ kobo_exports <- function(url="kobo.humanitarianresponse.info", uname="", pwd="",
   stop_for_status(respon.exp,"extract export list.")
   exports<-fromJSON(content(respon.exp,"text", encoding = encoding))
   return(exports)
+
 }
 
 
@@ -229,7 +232,7 @@ kobo_exports <- function(url="kobo.humanitarianresponse.info", uname="", pwd="",
 #' @param qry is a JSON object containing a Mongo filter query for filtering exported submissions. Valid inputs include
 #' a JSON object containing a valid Mongo query or An empty JSON object (no filtering)
 #' @param flatten is a is a boolean (in form of string) value and only relevant when exporting to "geojson" format. Valid inputs are "true" and "false"
-#'
+#' @param sleep is the sleep time between API actions. For example, it takes time to download an export. But R does not wait for the download to finish before going to next step. Hence the need to provide a break between consecutive API actions. Default value is 2 (seconds).
 #'
 #'
 #' @return The function creates an export, prints and returns the URL of the export created
@@ -245,16 +248,21 @@ kobo_export_create <- function(url="kobo.humanitarianresponse.info", uname="", p
                                assetid="", type= "csv", all="false", lang="_default",
                                hierarchy="false", include_grp="true",grp_sep="/",
                                multi_sel="both", fields=NULL, media_url ="true",
-                               sub_ids=NULL, qry=NULL, flatten="true"){
+                               sub_ids=NULL, qry=NULL, flatten="true", sleep=2){
 
   export_res<-export_creator(url=url, uname=uname, pwd=pwd,
                  assetid=assetid, type= type, all=all, lang=lang,
                  hierarchy=hierarchy, include_grp=include_grp,grp_sep=grp_sep,
                  multi_sel=multi_sel, fields=fields, media_url=media_url,
-                 sub_ids=sub_ids, qry=qry, flatten=flatten)
+                 sub_ids=sub_ids, qry=qry, flatten=flatten, sleep=sleep)
+  if(is.null(export_res)){
+    print("Export Could Not be created")
+    return(NULL)
+  } else{
+    print(export_res[1])
+    return(unlist(export_res[1]))
+  }
 
-  print(export_res[1])
-  return(export_res[1])
 }
 
 
@@ -305,18 +313,26 @@ kobo_df_download <- function(url="kobo.humanitarianresponse.info", uname="", pwd
   new_export_details<-export_creator(url=url, uname=uname, pwd=pwd,
                                                  assetid=assetid, type= "csv", all=all, lang=lang,
                                                  hierarchy=hierarchy, include_grp=include_grp,grp_sep=grp_sep,
-                                     multi_sel=multi_sel, fields=fields, media_url=media_url, sub_ids=sub_ids)
+                                     multi_sel=multi_sel, fields=fields, media_url=media_url, sub_ids=sub_ids, sleep=sleep)
 
   Sys.sleep(sleep)
-  dff<-export_downloader(new_export_details[[1]],fsep, uname, pwd, sleep)
 
-  deleteact<-DELETE(url=paste0(url,"/api/v2/assets/",assetid,"/exports/",new_export_details[[2]],"/"),
-                    authenticate(user=uname, password =pwd), progress())
-  while(is.na(deleteact$status_code) | is.null(deleteact$status_code)){
-    print("Attempting export deletion \n")
+  if(is.null(new_export_details)){
+    print("export creation was not successful")
+    return(NULL)
+  } else{
+    dff<-export_downloader(new_export_details[[1]],fsep, uname, pwd, sleep)
+
+    deleteact<-DELETE(url=paste0(url,"/api/v2/assets/",assetid,"/exports/",new_export_details[[2]],"/"),
+                      authenticate(user=uname, password =pwd), progress())
+    while(is.na(deleteact$status_code) | is.null(deleteact$status_code)){
+      print("Attempting export deletion \n")
+    }
+    warn_for_status(deleteact,"delete export. Please delete manually.")
+    if(deleteact$status_code==204) print("Export deleted from server")
+    return(dff)
   }
-  warn_for_status(deleteact,"delete export. Please delete manually.")
-  if(deleteact$status_code==204) print("Export deleted from server")
-  return(dff)
+
+
 }
 

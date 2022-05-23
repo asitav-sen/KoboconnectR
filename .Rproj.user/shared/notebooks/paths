@@ -15,6 +15,7 @@
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/man/kobotools_kpi_data.Rd="6988B23D"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat.R="A596E60E"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-get_kobo_token.R="AB98BD5E"
+/Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_df_download.R="C92CC245"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_export_create.R="DF94B895"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_exports.R="70210422"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobotools_api.R="32336AF9"

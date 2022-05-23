@@ -1,3 +1,8 @@
+# KoboconnectR 1.1.1
+
+Resolved issues of API not reacting to parameters. For example, setting `include_media_url` to "true" did not actually include the medial url. 
+Also, resolved the issues which were causing the last version to fail during tests. Specifically, not failing gracefully when the issue was coming from the internet resource.
+
 # KoboconnectR 1.1.0
 
 * New function `kobo_df_download` added, that enables direct download of csv file. A csv export is created and downloaded. Then the export is deleted.
