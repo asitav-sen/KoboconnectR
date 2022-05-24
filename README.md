@@ -9,6 +9,7 @@
 status](https://www.r-pkg.org/badges/version/KoboconnectR)](https://CRAN.R-project.org/package=KoboconnectR)
 [![R-CMD-check](https://github.com/asitav-sen/KoboconnectR/workflows/R-CMD-check/badge.svg)](https://github.com/asitav-sen/KoboconnectR/actions)
 [![](https://cranlogs.r-pkg.org/badges/KoboconnectR)](https://cran.r-project.org/package=KoboconnectR)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/KoboconnectR?color=blue)](https://r-pkg.org/pkg/KoboconnectR)
 
 <!-- badges: end -->
 
