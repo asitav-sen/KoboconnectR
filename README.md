@@ -52,6 +52,18 @@ returns a list of assets the user has access to.
 kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="userid", pwd="password")
 ```
 
+## Downloading data
+
+``` r
+KoboconnectR::kobo_df_download(uname = "username",
+                                          pwd="password", assetid = "assetid",
+                                          lang = "English (en)", all="false", lang="_default",
+                               hierarchy="false", include_grp="true",grp_sep="/",fsep=";",
+                              multi_sel="both", media_url="true", fields=NULL, sub_ids=NULL, sleep=2)
+```
+
+**IF THE DOWNLOAD FAILS, TRY INCREASING THE `SLEEP` PARAMETER.**
+
 For further details, check the vignette.
 
 ## Contribution
