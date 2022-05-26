@@ -62,7 +62,8 @@ KoboconnectR::kobo_df_download(uname = "username",
                               multi_sel="both", media_url="true", fields=NULL, sub_ids=NULL, sleep=2)
 ```
 
-**IF THE DOWNLOAD FAILS, TRY INCREASING THE `SLEEP` PARAMETER.**
+**IF THE DOWNLOAD FAILS, TRY INCREASING THE `SLEEP` PARAMETER (use the
+dev version please).**
 
 For further details, check the vignette.
 
