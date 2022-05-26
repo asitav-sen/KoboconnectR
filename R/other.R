@@ -88,7 +88,7 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
 
   if(post_time<=pre_time){
     cat("Execution in Progress...")
-    Sys.sleep(10)
+    Sys.sleep(sleep*2)
   }
 
   if(post_time<=pre_time){
@@ -104,7 +104,7 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
 
       if(is.na(post_export$results$result[post_count])){
         print("waiting..")
-        Sys.sleep(10)
+        Sys.sleep(sleep*5)
       }
       if(is.na(post_export$results$result[post_count])){
         print("Could not get export list")
