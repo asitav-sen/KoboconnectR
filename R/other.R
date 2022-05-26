@@ -69,7 +69,7 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
              submission_ids=sub_ids,
              query=qry
            ),
-           timeout(5))
+           timeout(sleep*2))
     },
     error=function(x){
       print("There was some error")
