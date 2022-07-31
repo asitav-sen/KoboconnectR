@@ -42,8 +42,8 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
   if(is.null(hierarchy)) stop("hierarchy empty")
   #if(is.null(grp_sep)) stop("grp_sep empty")
   if(is.null(include_grp)) stop("include_grp empty")
-  if(include_grp=="true" & is.null(grp_sep)) stop("grp_sep cannot be empty if include_grp is true")
-  if(include_grp=="false" & !is.null(grp_sep)) stop("grp_sep should be empty if include_grp is false")
+  if(include_grp=="true" & is.null(grp_sep)) stop("grp_sep cannot be empty")
+  #if(include_grp=="false" & !is.null(grp_sep)) stop("grp_sep should be empty if include_grp is false")
 
   pre_export<- kobo_exports(url=url, uname=uname, pwd=pwd)
   pre_count<-ifelse(is.null(pre_export$count),0,pre_export$count)
@@ -65,7 +65,7 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
              fields=fields,
              flatten= flatten,
              xls_types_as_text=xls_typ_as_text,
-             include_media_url=media_url,
+             #include_media_url=media_url,
              submission_ids=sub_ids,
              query=qry
            ),
