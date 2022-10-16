@@ -1,3 +1,8 @@
+
+# KoboconnectR 1.2.0
+
+Added new function `kobo_media_downloader` that downloads media from the kobo assets.
+
 # KoboconnectR 1.1.1
 
 Resolved issues of API not reacting to parameters. For example, setting `include_media_url` to "true" did not actually include the medial url. 

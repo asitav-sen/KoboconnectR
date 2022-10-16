@@ -33,7 +33,7 @@ kobo_df_download(
 
 \item{all}{takes logical value in string format. Used to specify whether fields from all form versions will be included in the export.Acceptable values are "true" or "false". Default value is "false".}
 
-\item{lang}{takes the language. For e.g. "English (en)".}
+\item{lang}{takes the language. For e.g. "English (en)". For "XML Values as headers", use '_xml'.}
 
 \item{hierarchy}{takes logical value in string format. Used to specify whether the group hierarchy will be displayed in labels. Acceptable values are "true" or "false". Default value is "false".}
 

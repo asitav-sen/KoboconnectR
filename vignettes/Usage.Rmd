@@ -124,7 +124,26 @@ kobo_df_download(uname = "username",pwd="password", assetid = "asset",
                                           lang = "English (en)")
 ```
 
+### Downloading xls file directly
 
+Works on the same principle as that in `kobo_df_download`, except the exported file is in `excel` format.
+
+```{r eval=FALSE, include=TRUE}
+kobo_xls_dl(uname = "username",pwd="password", assetid = "asset",
+                                          lang = "English (en)")
+```
+
+
+
+### Downloading Media Files
+
+This function downloads the file using `kobo_df_download` then finds the columns with media links and then downloads the files in a loop. This process is time consuming and you may face errors due to timeouts and server load issues.
+
+```{r eval=FALSE, include=TRUE}
+kobo_media_downloader(uname = "uid",pwd="password", assetid = "assetid")
+```
+
+In case do not want to use this function, use the data downloaded using `kobo_df_download` and find the columns where media links exist. Then loop over the values in the column (download using the function `download.file()`).
 
 ## Issues and Suggestions
 

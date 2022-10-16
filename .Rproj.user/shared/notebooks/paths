@@ -18,6 +18,8 @@
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_df_download.R="C92CC245"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_export_create.R="DF94B895"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_exports.R="70210422"
+/Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_media_downloader.R="C7CD36C8"
+/Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobo_xls_dl.R="E10A4CA3"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobotools_api.R="32336AF9"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/tests/testthat/test-kobotools_kpi_data.R="E1CED08D"
 /Users/scarecrow/Datascience/Personal Projects/Packages/KoboconnectR/vignettes/.gitignore="EAC491AA"

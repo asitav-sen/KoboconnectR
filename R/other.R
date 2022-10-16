@@ -65,7 +65,7 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
              fields=fields,
              flatten= flatten,
              xls_types_as_text=xls_typ_as_text,
-             #include_media_url=media_url,
+             include_media_url=media_url,
              submission_ids=sub_ids,
              query=qry
            ),
@@ -121,13 +121,22 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
 
 }
 
-export_downloader<-function(exp.url, fsep, uname, pwd, sleep){
+export_downloader<-function(exp.url, fsep, uname, pwd, sleep, type="csv"){
   tmp_file <- tempfile()
+  print("Password")
+  print(pwd)
   df<-httr::GET(exp.url, httr::authenticate(user=uname, password = pwd),progress())
   Sys.sleep(sleep)
   dff<-httr::content(df, type="raw",encoding = "UTF-8")
   Sys.sleep(sleep)
   writeBin(dff, tmp_file)
-  dff<-read.csv(tmp_file, sep=fsep)
+  if(type=="csv"){
+    dff<-read.csv(tmp_file, sep=fsep)
+  }
+
+  if(type=="xls"){
+    dff<-readxl::read_excel(tmp_file)
+  }
+
   return(dff)
 }
