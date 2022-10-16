@@ -89,3 +89,4 @@ The following packages are required to install and run this package.
 5.  Package [`openssl`](https://cran.r-project.org/package=openssl)
 6.  Package [`R6`](https://cran.r-project.org/package=R6)
 7.  Package `methods`
+8.  Package [`readxl`](https://cran.r-project.org/package=readxl)
