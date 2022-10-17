@@ -121,21 +121,28 @@ export_creator <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
 
 }
 
+
 export_downloader<-function(exp.url, fsep, uname, pwd, sleep, type="csv"){
-  tmp_file <- tempfile()
-  print("Password")
-  print(pwd)
-  df<-httr::GET(exp.url, httr::authenticate(user=uname, password = pwd),progress())
-  Sys.sleep(sleep)
-  dff<-httr::content(df, type="raw",encoding = "UTF-8")
-  Sys.sleep(sleep)
-  writeBin(dff, tmp_file)
+
   if(type=="csv"){
+    tmp_file <- tempfile()
+    df<-httr::GET(exp.url, httr::authenticate(user=uname, password = pwd),progress())
+    Sys.sleep(sleep)
+    dff<-httr::content(df, type="raw",encoding = "UTF-8")
+    Sys.sleep(sleep)
+    writeBin(dff, tmp_file)
     dff<-read.csv(tmp_file, sep=fsep)
   }
 
   if(type=="xls"){
-    dff<-readxl::read_excel(tmp_file)
+    httr::GET(exp.url, httr::authenticate(user=uname, password = pwd),
+              httr::write_disk("kobodl.xlsx", overwrite = TRUE), progress())
+    path<-"kobodl.xlsx"
+    dff<-
+      path |>
+      readxl::excel_sheets() |>
+      rlang::set_names() |>
+      purrr::map(readxl::read_excel, path=path)
   }
 
   return(dff)

@@ -424,7 +424,9 @@ kobo_media_downloader <- function(url="kobo.humanitarianresponse.info",uname,pwd
 #' @importFrom httr POST content authenticate progress DELETE GET
 #' @importFrom jsonlite fromJSON
 #' @importFrom utils read.csv
-#' @importFrom readxl read_excel
+#' @importFrom readxl read_excel excel_sheets
+#' @importFrom rlang set_names
+#' @importFrom purrr map
 #'
 #' @export
 kobo_xls_dl<- function(url="kobo.humanitarianresponse.info", uname="", pwd="",
@@ -456,5 +458,4 @@ kobo_xls_dl<- function(url="kobo.humanitarianresponse.info", uname="", pwd="",
 
 
 }
-
 

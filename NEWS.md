@@ -1,3 +1,7 @@
+# KoboconnectR 1.2.1
+
+Changed function `kobo_xls_dl()` to include multiple sheets.
+Changed test files to rectify errors in CRAN.
 
 # KoboconnectR 1.2.0
 
