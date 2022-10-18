@@ -138,11 +138,12 @@ export_downloader<-function(exp.url, fsep, uname, pwd, sleep, type="csv"){
     httr::GET(exp.url, httr::authenticate(user=uname, password = pwd),
               httr::write_disk("kobodl.xlsx", overwrite = TRUE), progress())
     path<-"kobodl.xlsx"
-    dff<-
-      path |>
-      readxl::excel_sheets() |>
-      rlang::set_names() |>
-      purrr::map(readxl::read_excel, path=path)
+    dff<-purrr::map(rlang::set_names(readxl::excel_sheets(path)),readxl::read_excel, path=path)
+
+      # path |>
+      # readxl::excel_sheets() |>
+      # rlang::set_names() |>
+      # purrr::map(readxl::read_excel, path=path)
   }
 
   return(dff)
