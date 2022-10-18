@@ -42,37 +42,49 @@ kobotools_api<- function(url="kobo.humanitarianresponse.info", simplified=TRUE, 
   if(!is.logical(simplified)) stop("simplied can take only logical value")
 
   fullurl<-paste0("https://",url,"/api/v2/assets.json")
-  respon.api<-GET(fullurl, authenticate(uname, pwd), progress())
-
-  stop_for_status(respon.api, "extract asset details")
-  parsed <- fromJSON(content(respon.api, "text", encoding = encoding), simplifyVector = FALSE)
-
-  if(simplified==FALSE){
-    return(parsed)
-  } else {
-    link<-NULL
-    date_created<-NULL
-    date_modified<-NULL
-    owner<-NULL
-    assetid<-NULL
-    name<-NULL
-    active<-NULL
-    submissions<-NULL
-    x<-parsed$count
-    for(i in 1:x){
-      link[i]<-parsed$results[[i]]$url
-      date_created[i]<-parsed$results[[i]]$date_created
-      date_modified[i]<-parsed$results[[i]]$date_modified
-      owner[i]<-parsed$results[[i]]$owner__username
-      assetid[i]<-parsed$results[[i]]$uid
-      name[i]<-parsed$results[[i]]$name
-      active[i]<-parsed$results[[i]]$deployment__active
-      submissions[i]<-parsed$results[[i]]$deployment__submission_count
+  respon.api<- tryCatch(
+    expr = {
+      GET(fullurl, authenticate(uname, pwd), progress())
+    },
+    error = function(x){
+      print("Error. Please try again or check the input parameters.")
+      return(NULL)
     }
-    simp.parsed<- data.frame(name=name, asset=assetid, active=active,submissions=submissions, owner=owner,
-                             date_created=date_created, date_modified=date_modified, URL=link)
-    return(simp.parsed)
-  }
+  )
+
+  if(!is.null(respon.api)){
+    #stop_for_status(respon.api, "extract asset details")
+    parsed <- fromJSON(content(respon.api, "text", encoding = encoding), simplifyVector = FALSE)
+
+    if(simplified==FALSE){
+      return(parsed)
+    } else {
+      link<-NULL
+      date_created<-NULL
+      date_modified<-NULL
+      owner<-NULL
+      assetid<-NULL
+      name<-NULL
+      active<-NULL
+      submissions<-NULL
+      x<-parsed$count
+      for(i in 1:x){
+        link[i]<-parsed$results[[i]]$url
+        date_created[i]<-parsed$results[[i]]$date_created
+        date_modified[i]<-parsed$results[[i]]$date_modified
+        owner[i]<-parsed$results[[i]]$owner__username
+        assetid[i]<-parsed$results[[i]]$uid
+        name[i]<-parsed$results[[i]]$name
+        active[i]<-parsed$results[[i]]$deployment__active
+        submissions[i]<-parsed$results[[i]]$deployment__submission_count
+      }
+      simp.parsed<- data.frame(name=name, asset=assetid, active=active,submissions=submissions, owner=owner,
+                               date_created=date_created, date_modified=date_modified, URL=link)
+      return(simp.parsed)
+    }
+  } else return(NULL)
+
+
 
 
 }
@@ -117,10 +129,23 @@ kobotools_kpi_data<- function(assetid,url="kobo.humanitarianresponse.info", unam
 
 
   fullurl<-paste0("https://",url,"/api/v2/assets/",assetid,"/data/")
-  respon.kpi<-GET(fullurl, authenticate(uname, pwd), progress())
-  stop_for_status(respon.kpi, "extract data")
-  dt<-content(respon.kpi, encoding = encoding)
-  return(dt)
+  respon.kpi<- tryCatch(
+    expr = {
+      GET(fullurl, authenticate(uname, pwd), progress())
+    },
+    error= function(x){
+      print("Error. Please try again or check the input parameters.")
+      return(NULL)
+    }
+  )
+
+  if(!is.null(respon.kpi)){
+    stop_for_status(respon.kpi, "extract data")
+    dt<-content(respon.kpi, encoding = encoding)
+    return(dt)
+  } else return(NULL)
+
+
 
 }
 
@@ -156,10 +181,22 @@ get_kobo_token <- function(url="kobo.humanitarianresponse.info", uname="", pwd="
   if(is.null(pwd) | pwd=="") stop("pwd (password) empty")
 
   fullurl<-paste0("https://",url,"/token/?format=json")
-  respon.token<-GET(fullurl, authenticate(uname, pwd), progress())
-  stop_for_status(respon.token,"extract token")
-  tkn<-fromJSON(content(respon.token,"text", encoding = encoding))
-  return(tkn)
+  respon.token<- tryCatch(
+    expr = {
+      GET(fullurl, authenticate(uname, pwd), progress())
+    },
+    error = function(x){
+      print("Error. Please try again or check the input parameters.")
+      return(NULL)
+    }
+  )
+
+  if(!is.null(respon.token)){
+    #stop_for_status(respon.token,"extract token")
+    tkn<-fromJSON(content(respon.token,"text", encoding = encoding))
+    return(tkn)
+  } else return(NULL)
+
 
 }
 
@@ -195,10 +232,22 @@ kobo_exports <- function(url="kobo.humanitarianresponse.info", uname="", pwd="",
   if(is.null(pwd)) stop("pwd (password) empty")
 
   fullurl<-paste0("https://",url,"/exports/")
-  respon.exp<-GET(fullurl, authenticate(uname, pwd), progress())
-  stop_for_status(respon.exp,"extract export list.")
-  exports<-fromJSON(content(respon.exp,"text", encoding = encoding))
-  return(exports)
+  respon.exp<- tryCatch(
+    expr = {
+      GET(fullurl, authenticate(uname, pwd), progress())
+    },
+    error = function(x){
+      print("Error. Please try again or check the input parameters.")
+      return (NULL)
+    }
+  )
+
+  if(!is.null(respon.exp)){
+    stop_for_status(respon.exp,"extract export list.")
+    exports<-fromJSON(content(respon.exp,"text", encoding = encoding))
+    return(exports)
+  } else return (NULL)
+
 
 }
 
@@ -369,25 +418,31 @@ kobo_media_downloader <- function(url="kobo.humanitarianresponse.info",uname,pwd
   dat<-kobo_df_download(url=url,uname = uname,
                    pwd=pwd, assetid = assetid,
                    lang = "_default", sleep=sleep, fsep=fsep)
-
-  print("Please note that this function loops over the URLs and downloads the individual files. This process can be slow and
+  if(!is.null(dat)){
+    print("Please note that this function loops over the URLs and downloads the individual files. This process can be slow and
         some files may fail to download due to timeout issues. Downloading a zipped file is not supported using API, yet in Kobotoolbox.")
 
-  cnamesdat<-colnames(dat)
+    cnamesdat<-colnames(dat)
 
-  urlcols<-cnamesdat[grepl(paste0("*",identifier),cnamesdat)]
-  options(timeout = max(timeoutval, getOption("timeout")))
+    urlcols<-cnamesdat[grepl(paste0("*",identifier),cnamesdat)]
+    options(timeout = max(timeoutval, getOption("timeout")))
 
-  if (!file.exists(destfolder)){
-    dir.create(destfolder)
+    if (!file.exists(destfolder)){
+      dir.create(destfolder)
+    }
+
+    for(i in 1:length(urlcols)){
+      fname<-paste0("./",destfolder,"/",urlcols[i],"_",seq(1:length(dat[,urlcols[i]])))
+      download.file(dat[,urlcols[i]],fname, method="libcurl")
+    }
+
+    return(TRUE)
+  } else {
+    print("Data could not be downloaded. Please try again or check the parameters.")
+    return(FALSE)
   }
 
-  for(i in 1:length(urlcols)){
-    fname<-paste0("./",destfolder,"/",urlcols[i],"_",seq(1:length(dat[,urlcols[i]])))
-    download.file(dat[,urlcols[i]],fname, method="libcurl")
-  }
 
-  return(TRUE)
 
 }
 
