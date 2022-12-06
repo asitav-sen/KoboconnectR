@@ -25,7 +25,7 @@ library(KoboconnectR)
 
 ```{r eval=FALSE, include=TRUE}
 library(KoboconnectR)
-get_kobo_token(url="kobo.humanitarianresponse.info", uname="userid", pwd="password")
+get_kobo_token(url = "kobo.humanitarianresponse.info", uname = "userid", pwd = "password")
 ```
 
 
@@ -45,7 +45,7 @@ Extracting data is two step process. Step one is to identify the asset id. And n
 
 
 ```{r echo=TRUE, eval=FALSE, include=TRUE}
-kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="userid", pwd="password")
+kobotools_api(url = "kobo.humanitarianresponse.info", simplified = T, uname = "userid", pwd = "password")
 ```
 
 The output will be a simplified data frame if `simplified =T` is used in the `kobotools_api` function.
@@ -61,7 +61,7 @@ Use the asset id and plug in to the `kobotools_kpi_data` function to download th
 
 
 ```{r eval=FALSE, include=TRUE}
-kobotools_kpi_data(assetid= "assetid", url="kobo.humanitarianresponse.info", uname="username", pwd="password")
+kobotools_kpi_data(assetid = "assetid", url = "kobo.humanitarianresponse.info", uname = "username", pwd = "password")
 ```
 
 
@@ -89,7 +89,7 @@ Using 'kobo_exports()' function, you can view the list of existing exports. This
 
 
 ```{r eval=FALSE, include=TRUE}
-kobo_exports(url="kobo.humanitarianresponse.info", uname="", pwd="")
+kobo_exports(url = "kobo.humanitarianresponse.info", uname = "", pwd = "")
 ```
 
 
@@ -101,9 +101,11 @@ Please note that 'Kobotoolbox' has a limited memory and you may have to delete e
 
 
 ```{r eval=FALSE, include=TRUE}
-kobo_export_create(url="kobo.humanitarianresponse.info", uname="", pwd="",
-                               assetid="", type= "csv", all="false", lang="_default",
-                               hierarchy="false", include_grp="true",grp_sep="/")
+kobo_export_create(
+  url = "kobo.humanitarianresponse.info", uname = "", pwd = "",
+  assetid = "", type = "csv", all = "false", lang = "_default",
+  hierarchy = "false", include_grp = "true", grp_sep = "/"
+)
 ```
 
 On successful execution, the URL of the created export will be returned and printed. You can use this URL to download, import or read data in R.
@@ -120,8 +122,10 @@ This is a new function which
 
 
 ```{r eval=FALSE, include=TRUE}
-kobo_df_download(uname = "username",pwd="password", assetid = "asset",
-                                          lang = "English (en)")
+kobo_df_download(
+  uname = "username", pwd = "password", assetid = "asset",
+  lang = "English (en)"
+)
 ```
 
 ### Downloading xls file directly
@@ -129,8 +133,10 @@ kobo_df_download(uname = "username",pwd="password", assetid = "asset",
 Works on the same principle as that in `kobo_df_download`, except the exported file is in `excel` format.
 
 ```{r eval=FALSE, include=TRUE}
-kobo_xls_dl(uname = "username",pwd="password", assetid = "asset",
-                                          lang = "English (en)")
+kobo_xls_dl(
+  uname = "username", pwd = "password", assetid = "asset",
+  lang = "English (en)"
+)
 ```
 
 
@@ -140,7 +146,7 @@ kobo_xls_dl(uname = "username",pwd="password", assetid = "asset",
 This function downloads the file using `kobo_df_download` then finds the columns with media links and then downloads the files in a loop. This process is time consuming and you may face errors due to timeouts and server load issues.
 
 ```{r eval=FALSE, include=TRUE}
-kobo_media_downloader(uname = "uid",pwd="password", assetid = "assetid")
+kobo_media_downloader(uname = "uid", pwd = "password", assetid = "assetid")
 ```
 
 In case do not want to use this function, use the data downloaded using `kobo_df_download` and find the columns where media links exist. Then loop over the values in the column (download using the function `download.file()`).

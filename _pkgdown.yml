@@ -1,0 +1,13 @@
+url: https://asitav-sen.github.io/KoboconnectR/
+template:
+  bootstrap: 5
+  bootswatch: sandstone
+footer:
+  structure:
+    left: developed_by
+    right: legal
+  components:
+    legal: Provided without **any warranty**.
+development:
+  mode: auto
+

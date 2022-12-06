@@ -1,7 +1,8 @@
 Package: KoboconnectR
 Type: Package
 Title: Download Data from Kobotoolbox to R
-URL: https://github.com/asitav-sen/KoboconnectR
+URL: https://github.com/asitav-sen/KoboconnectR,
+    https://asitav-sen.github.io/KoboconnectR/
 BugReports: https://github.com/asitav-sen/koboconnectR/issues
 Version: 1.2.1
 Authors@R: person("Asitav ", "Sen", email = "hello@asitavsen.com",
