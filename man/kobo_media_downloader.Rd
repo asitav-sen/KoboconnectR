@@ -5,7 +5,7 @@
 \title{Downloads media data from Kobotoolbox}
 \usage{
 kobo_media_downloader(
-  url = "kobo.humanitarianresponse.info",
+  url = "eu.kobotoolbox.org",
   uname,
   pwd,
   assetid,
@@ -17,7 +17,7 @@ kobo_media_downloader(
 )
 }
 \arguments{
-\item{url}{The `[url]` of kobotoolbox Default is "kobo.humanitarianresponse.info".}
+\item{url}{The `[url]` of kobotoolbox Default is "eu.kobotoolbox.org".}
 
 \item{uname}{is username of your kobotoolbox account}
 

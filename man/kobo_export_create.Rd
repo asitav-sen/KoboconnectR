@@ -5,7 +5,7 @@
 \title{Create an export}
 \usage{
 kobo_export_create(
-  url = "kobo.humanitarianresponse.info",
+  url = "eu.kobotoolbox.org",
   uname = "",
   pwd = "",
   assetid = "",
@@ -25,7 +25,7 @@ kobo_export_create(
 )
 }
 \arguments{
-\item{url}{The `[url]` of kobotoolbox Default is "kobo.humanitarianresponse.info".}
+\item{url}{The `[url]` of kobotoolbox Default is "eu.kobotoolbox.org".}
 
 \item{uname}{is username of your kobotoolbox account}
 

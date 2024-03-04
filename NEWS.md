@@ -1,3 +1,10 @@
+
+#KoboconnectR 1.2.2
+
+Replaced `kobo.humanitarianresponse.info` with `eu.kobotoolbox.org` because of change in API location.
+
+
+
 # KoboconnectR 1.2.1
 
 Changed function `kobo_xls_dl()` to include multiple sheets.

@@ -5,7 +5,7 @@
 \title{Check kobotoolbox API and retrieve overall info about the projects/assets}
 \usage{
 kobotools_api(
-  url = "kobo.humanitarianresponse.info",
+  url = "eu.kobotoolbox.org",
   simplified = TRUE,
   uname = "",
   pwd = "",
@@ -13,7 +13,7 @@ kobotools_api(
 )
 }
 \arguments{
-\item{url}{The `[kpi-url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info"}
+\item{url}{The `[kpi-url]` of kobotoolbox. Default is "eu.kobotoolbox.org"}
 
 \item{simplified}{A logical value, default is true}
 
@@ -30,7 +30,7 @@ The function returns the asset details from the API, inform of a data frame or j
 `kobotools_api` is a wrapper for kobotoolbox API `https://[kpi-url]/api/v2/assets.json`
 }
 \details{
-The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "kobo.humanitarianresponse.info" or
+The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "eu.kobotoolbox.org" or
 "kf.kobotoolbox.org". Former is the default. The second parameter is `simplified` which takes a logical value. If set to true,
 the function will return selected values from the parsed data and return a data frame. When set to false, a json will be returned with
 all the details.

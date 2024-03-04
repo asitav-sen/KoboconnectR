@@ -4,12 +4,12 @@
 #' `kobotools_api` is a wrapper for kobotoolbox API `https://[kpi-url]/api/v2/assets.json`
 #'
 #' @details
-#' The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "kobo.humanitarianresponse.info" or
+#' The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "eu.kobotoolbox.org" or
 #' "kf.kobotoolbox.org". Former is the default. The second parameter is `simplified` which takes a logical value. If set to true,
 #' the function will return selected values from the parsed data and return a data frame. When set to false, a json will be returned with
 #' all the details.
 #'
-#' @param url The `[kpi-url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info"
+#' @param url The `[kpi-url]` of kobotoolbox. Default is "eu.kobotoolbox.org"
 #' @param simplified A logical value, default is true
 #' @param uname takes the username
 #' @param pwd takes the password
@@ -30,7 +30,7 @@
 #'
 #' @export
 
-kobotools_api <- function(url = "kobo.humanitarianresponse.info", simplified = TRUE, uname = "", pwd = "", encoding = "UTF-8") {
+kobotools_api <- function(url = "eu.kobotoolbox.org", simplified = TRUE, uname = "", pwd = "", encoding = "UTF-8") {
   if (!is.character(url)) stop("URL entered is not a string")
   if (!is.character(uname)) stop("uname (username) entered is not a string")
   if (!is.character(pwd)) stop("pwd (password) entered is not a string")
@@ -92,13 +92,13 @@ kobotools_api <- function(url = "kobo.humanitarianresponse.info", simplified = T
 #' Extract data from kobotoolbox
 #'
 #' @description
-#' `kobotools_kpi_data` is a wrapper for kobotoolbox API `https://[URL]/api/v2/assets/{assetid}/data/`
+#' `kobotools_kpi_data` is a wrapper for kobotoolbox API `https://[URL]/api/v2/assets/[assetid]/data/`
 #'
 #' @details
 #' The function takes the url as one of the inputs. And asset id as another. Both are strings. The asset id is found by running
 #' the [kobotools_api()] function.Other parameters are username and password.
 #'
-#' @param url The `[kpi-url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info"
+#' @param url The `[kpi-url]` of kobotoolbox. Default is "eu.kobotoolbox.org"
 #' @param assetid is the asset id of the asset for which the data is to be downloaded. The id can be found by running [kobotools_data_list_kc()]
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
@@ -114,7 +114,7 @@ kobotools_api <- function(url = "kobo.humanitarianresponse.info", simplified = T
 #'
 #' @export
 
-kobotools_kpi_data <- function(assetid, url = "kobo.humanitarianresponse.info", uname = "", pwd = "", encoding = "UTF-8") {
+kobotools_kpi_data <- function(assetid, url = "eu.kobotoolbox.org", uname = "", pwd = "", encoding = "UTF-8") {
   if (!is.character(url)) stop("URL entered is not a string")
   if (!is.character(uname)) stop("uname (username) entered is not a string")
   if (!is.character(pwd)) stop("pwd (password) entered is not a string")
@@ -153,7 +153,7 @@ kobotools_kpi_data <- function(assetid, url = "kobo.humanitarianresponse.info", 
 #' @details
 #' The function returns the API token.
 #'
-#' @param url The `[url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info".
+#' @param url The `[url]` of kobotoolbox. Default is "eu.kobotoolbox.org".
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
 #' @param encoding is the encoding to be used. Default is "UTF-8".
@@ -167,7 +167,7 @@ kobotools_kpi_data <- function(assetid, url = "kobo.humanitarianresponse.info", 
 #'
 #' @export
 
-get_kobo_token <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd = "", encoding = "UTF-8") {
+get_kobo_token <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "", encoding = "UTF-8") {
   if (!is.character(url)) stop("URL entered is not a string")
   if (!is.character(uname)) stop("uname (username) entered is not a string")
   if (!is.character(pwd)) stop("pwd (password) entered is not a string")
@@ -204,7 +204,7 @@ get_kobo_token <- function(url = "kobo.humanitarianresponse.info", uname = "", p
 #' @details
 #' The function returns the export views.
 #'
-#' @param url The `[url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info".
+#' @param url The `[url]` of kobotoolbox. Default is "eu.kobotoolbox.org".
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
 #' @param encoding is the encoding to be used. Default is "UTF-8".
@@ -217,7 +217,7 @@ get_kobo_token <- function(url = "kobo.humanitarianresponse.info", uname = "", p
 #'
 #' @export
 
-kobo_exports <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd = "", encoding = "UTF-8") {
+kobo_exports <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "", encoding = "UTF-8") {
   if (!is.character(url)) stop("URL entered is not a string")
   if (!is.character(uname)) stop("uname (username) entered is not a string")
   if (!is.character(pwd)) stop("pwd (password) entered is not a string")
@@ -254,7 +254,7 @@ kobo_exports <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd
 #' @details
 #' The function creates an export of survey data. If successful, returns the URL of the data that can be directly downloaded/read/imported in R.
 #'
-#' @param url The `[url]` of kobotoolbox Default is "kobo.humanitarianresponse.info".
+#' @param url The `[url]` of kobotoolbox Default is "eu.kobotoolbox.org".
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
 #' @param assetid is the id of the asset for which the export is to be created
@@ -287,7 +287,7 @@ kobo_exports <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd
 #' @export
 
 
-kobo_export_create <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd = "",
+kobo_export_create <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "",
                                assetid = "", type = "csv", all = "false", lang = "_default",
                                hierarchy = "false", include_grp = "true", grp_sep = "/",
                                multi_sel = "both", fields = NULL, media_url = "true",
@@ -317,7 +317,7 @@ kobo_export_create <- function(url = "kobo.humanitarianresponse.info", uname = "
 #' @details
 #' The function creates an export of survey data in 'csv'. If successful, it attempts to download the data and and return a data frame.
 #'
-#' @param url The `[url]` of kobotoolbox Default is "kobo.humanitarianresponse.info".
+#' @param url The `[url]` of kobotoolbox Default is "eu.kobotoolbox.org".
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
 #' @param assetid is the id of the asset for which the export is to be created
@@ -348,7 +348,7 @@ kobo_export_create <- function(url = "kobo.humanitarianresponse.info", uname = "
 #' @export
 
 
-kobo_df_download <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd = "",
+kobo_df_download <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "",
                              assetid = "", all = "false", lang = "_default",
                              hierarchy = "false", include_grp = "true", grp_sep = "/", fsep = ";",
                              multi_sel = "both", media_url = "true", fields = NULL, sub_ids = NULL, sleep = 2) {
@@ -389,7 +389,7 @@ kobo_df_download <- function(url = "kobo.humanitarianresponse.info", uname = "",
 #' @details
 #' The function creates an export of survey data in 'csv'. If successful, it attempts to download the data and and return a data frame.
 #'
-#' @param url The `[url]` of kobotoolbox Default is "kobo.humanitarianresponse.info".
+#' @param url The `[url]` of kobotoolbox Default is "eu.kobotoolbox.org".
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
 #' @param assetid is the id of the asset for which the export is to be created
@@ -409,7 +409,7 @@ kobo_df_download <- function(url = "kobo.humanitarianresponse.info", uname = "",
 #'
 #' @export
 
-kobo_media_downloader <- function(url = "kobo.humanitarianresponse.info", uname, pwd, assetid, fsep = ";", sleep = 2, identifier = "URL", timeoutval = 300, destfolder = "media") {
+kobo_media_downloader <- function(url = "eu.kobotoolbox.org", uname, pwd, assetid, fsep = ";", sleep = 2, identifier = "URL", timeoutval = 300, destfolder = "media") {
   dat <- kobo_df_download(
     url = url, uname = uname,
     pwd = pwd, assetid = assetid,
@@ -448,7 +448,7 @@ kobo_media_downloader <- function(url = "kobo.humanitarianresponse.info", uname,
 #' @details
 #' The function creates an export of survey data in 'xls'. If successful, it attempts to download the data and and return a data frame (reading using `readxl::read_excel`).
 #'
-#' @param url The `[url]` of kobotoolbox Default is "kobo.humanitarianresponse.info".
+#' @param url The `[url]` of kobotoolbox Default is "eu.kobotoolbox.org".
 #' @param uname is username of your kobotoolbox account
 #' @param pwd is the password of the account
 #' @param assetid is the id of the asset for which the export is to be created
@@ -478,7 +478,7 @@ kobo_media_downloader <- function(url = "kobo.humanitarianresponse.info", uname,
 #' @importFrom purrr map
 #'
 #' @export
-kobo_xls_dl <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd = "",
+kobo_xls_dl <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "",
                         assetid = "", all = "false", lang = "_default",
                         hierarchy = "false", include_grp = "true", grp_sep = "/",
                         multi_sel = "both", media_url = "true", fields = NULL, sub_ids = NULL, sleep = 2) {

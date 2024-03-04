@@ -5,7 +5,7 @@
 \title{Creates a data frame after creating a 'csv' export and downloading it}
 \usage{
 kobo_df_download(
-  url = "kobo.humanitarianresponse.info",
+  url = "eu.kobotoolbox.org",
   uname = "",
   pwd = "",
   assetid = "",
@@ -23,7 +23,7 @@ kobo_df_download(
 )
 }
 \arguments{
-\item{url}{The `[url]` of kobotoolbox Default is "kobo.humanitarianresponse.info".}
+\item{url}{The `[url]` of kobotoolbox Default is "eu.kobotoolbox.org".}
 
 \item{uname}{is username of your kobotoolbox account}
 

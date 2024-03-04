@@ -25,7 +25,7 @@ library(KoboconnectR)
 
 ```{r eval=FALSE, include=TRUE}
 library(KoboconnectR)
-get_kobo_token(url = "kobo.humanitarianresponse.info", uname = "userid", pwd = "password")
+get_kobo_token(url = "eu.kobotoolbox.org", uname = "userid", pwd = "password")
 ```
 
 
@@ -45,7 +45,7 @@ Extracting data is two step process. Step one is to identify the asset id. And n
 
 
 ```{r echo=TRUE, eval=FALSE, include=TRUE}
-kobotools_api(url = "kobo.humanitarianresponse.info", simplified = T, uname = "userid", pwd = "password")
+kobotools_api(url = "eu.kobotoolbox.org", simplified = T, uname = "userid", pwd = "password")
 ```
 
 The output will be a simplified data frame if `simplified =T` is used in the `kobotools_api` function.
@@ -61,7 +61,7 @@ Use the asset id and plug in to the `kobotools_kpi_data` function to download th
 
 
 ```{r eval=FALSE, include=TRUE}
-kobotools_kpi_data(assetid = "assetid", url = "kobo.humanitarianresponse.info", uname = "username", pwd = "password")
+kobotools_kpi_data(assetid = "assetid", url = "eu.kobotoolbox.org", uname = "username", pwd = "password")
 ```
 
 
@@ -89,7 +89,7 @@ Using 'kobo_exports()' function, you can view the list of existing exports. This
 
 
 ```{r eval=FALSE, include=TRUE}
-kobo_exports(url = "kobo.humanitarianresponse.info", uname = "", pwd = "")
+kobo_exports(url = "eu.kobotoolbox.org", uname = "", pwd = "")
 ```
 
 
@@ -102,7 +102,7 @@ Please note that 'Kobotoolbox' has a limited memory and you may have to delete e
 
 ```{r eval=FALSE, include=TRUE}
 kobo_export_create(
-  url = "kobo.humanitarianresponse.info", uname = "", pwd = "",
+  url = "eu.kobotoolbox.org", uname = "", pwd = "",
   assetid = "", type = "csv", all = "false", lang = "_default",
   hierarchy = "false", include_grp = "true", grp_sep = "/"
 )

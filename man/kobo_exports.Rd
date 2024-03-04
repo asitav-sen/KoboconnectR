@@ -5,14 +5,14 @@
 \title{See list of exports created}
 \usage{
 kobo_exports(
-  url = "kobo.humanitarianresponse.info",
+  url = "eu.kobotoolbox.org",
   uname = "",
   pwd = "",
   encoding = "UTF-8"
 )
 }
 \arguments{
-\item{url}{The `[url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info".}
+\item{url}{The `[url]` of kobotoolbox. Default is "eu.kobotoolbox.org".}
 
 \item{uname}{is username of your kobotoolbox account}
 

@@ -6,7 +6,7 @@
 \usage{
 kobotools_kpi_data(
   assetid,
-  url = "kobo.humanitarianresponse.info",
+  url = "eu.kobotoolbox.org",
   uname = "",
   pwd = "",
   encoding = "UTF-8"
@@ -15,7 +15,7 @@ kobotools_kpi_data(
 \arguments{
 \item{assetid}{is the asset id of the asset for which the data is to be downloaded. The id can be found by running [kobotools_data_list_kc()]}
 
-\item{url}{The `[kpi-url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info"}
+\item{url}{The `[kpi-url]` of kobotoolbox. Default is "eu.kobotoolbox.org"}
 
 \item{uname}{is username of your kobotoolbox account}
 
@@ -27,7 +27,7 @@ kobotools_kpi_data(
 The function returns the data in json format
 }
 \description{
-`kobotools_kpi_data` is a wrapper for kobotoolbox API `https://[URL]/api/v2/assets/{assetid}/data/`
+`kobotools_kpi_data` is a wrapper for kobotoolbox API `https://[URL]/api/v2/assets/[assetid]/data/`
 }
 \details{
 The function takes the url as one of the inputs. And asset id as another. Both are strings. The asset id is found by running

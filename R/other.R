@@ -6,7 +6,7 @@ is_response <- function(x) {
   class(x) == "response"
 }
 
-export_creator <- function(url = "kobo.humanitarianresponse.info", uname = "", pwd = "",
+export_creator <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "",
                            assetid = "", type = "csv", all = "false", lang = "_default",
                            hierarchy = "false", include_grp = "true", grp_sep = "/", multi_sel = "both",
                            fields = NULL, media_url = "true", sub_ids = NULL,

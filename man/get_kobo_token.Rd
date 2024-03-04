@@ -5,14 +5,14 @@
 \title{Know your API token or check}
 \usage{
 get_kobo_token(
-  url = "kobo.humanitarianresponse.info",
+  url = "eu.kobotoolbox.org",
   uname = "",
   pwd = "",
   encoding = "UTF-8"
 )
 }
 \arguments{
-\item{url}{The `[url]` of kobotoolbox. Default is "kobo.humanitarianresponse.info".}
+\item{url}{The `[url]` of kobotoolbox. Default is "eu.kobotoolbox.org".}
 
 \item{uname}{is username of your kobotoolbox account}
 
