@@ -1,16 +1,4 @@
 url: https://asitav-sen.github.io/KoboconnectR/
 template:
-  includes:
-    in_header: |
-      <script defer data-domain="asitav-sen.github.io/koboconnectr" src="https://webanal.tools.asitavsen.com/js/script.js"></script>
   bootstrap: 5
-  bootswatch: sandstone
-footer:
-  structure:
-    left: developed_by
-    right: legal
-  components:
-    legal: Provided without **any warranty**.
-development:
-  mode: auto
 
