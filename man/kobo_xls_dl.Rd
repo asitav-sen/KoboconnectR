@@ -57,7 +57,7 @@ If "fields" is not included in the "export_settings", all columns will be includ
 The function returns a data frame of data downloaded from 'Kobotoolbox'.
 }
 \description{
-`kobo_xls_dl` is a wrapper for kobotoolbox API `https://[url]/exports/..`
+`kobo_xls_dl` is a wrapper for kobotoolbox API that attemps to download data in excel compatible formal.
 }
 \details{
 The function creates an export of survey data in 'xls'. If successful, it attempts to download the data and and return a data frame (reading using `readxl::read_excel`).

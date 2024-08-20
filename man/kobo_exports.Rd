@@ -8,7 +8,9 @@ kobo_exports(
   url = "eu.kobotoolbox.org",
   uname = "",
   pwd = "",
-  encoding = "UTF-8"
+  encoding = "UTF-8",
+  assetid = "",
+  simplified = FALSE
 )
 }
 \arguments{
@@ -18,13 +20,17 @@ kobo_exports(
 
 \item{pwd}{is the password of the account}
 
-\item{encoding}{is the encoding to be used. Default is "UTF-8".}
+\item{encoding}{is the encoding to be used. Default is "UTF-8"}
+
+\item{assetid}{the asset id}
+
+\item{simplified}{if TRUE, then return a simple data frame with selected data, if FALSE returns the full list.}
 }
 \value{
 The function returns a list of exports available for the account id and password entered.
 }
 \description{
-`kobo_exports` is a wrapper for kobotoolbox API `https://[url]/exports/`
+`kobo_exports` is a wrapper for kobotoolbox API `https://[kpi-url]/api/v2/assets/[assetid]/exports/`
 }
 \details{
 The function returns the export views.

@@ -40,8 +40,8 @@ containing the URL values end with "URL". Please note that any other column name
 The function returns a data frame of data downloaded from 'Kobotoolbox'.
 }
 \description{
-`kobo_media_downloader` downloads media from data downloaded using `kobo_df_download`. Loops through media columns and downloads files individually.`
+`kobo_media_downloader` downloads media from data downloaded using `kobo_df_download`. Loops through media columns and downloads files individually.
 }
 \details{
-The function creates an export of survey data in 'csv'. If successful, it attempts to download the data and and return a data frame.
+The function creates an export of survey data in 'csv'. If successful, it attempts to download the data and and returns a data frame. From that data frame, the function extracts the URLs of media and attempts to download them.
 }

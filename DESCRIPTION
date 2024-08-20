@@ -4,16 +4,16 @@ Title: Download Data from Kobotoolbox to R
 URL: https://github.com/asitav-sen/KoboconnectR,
     https://asitav-sen.github.io/KoboconnectR/
 BugReports: https://github.com/asitav-sen/koboconnectR/issues
-Version: 1.2.2
-Authors@R: person("Asitav ", "Sen", email = "hello@asitavsen.com",
+Version: 2.0.0
+Authors@R: person("Asitav ", "Sen", email = "codes@asitavsen.com",
                   role = c("aut", "cre","cph"))
 Description: Wrapper for 'Kobotoolbox' APIs ver 2 mentioned at <https://support.kobotoolbox.org/api.html>, to download data from 'Kobotoolbox' to R. Small and simple package that adds immense convenience for the data professionals using 'Kobotoolbox'.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Imports:
-    httr,
+    httr2,
     curl,
     jsonlite,
     mime,

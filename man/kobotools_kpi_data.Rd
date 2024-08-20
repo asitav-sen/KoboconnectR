@@ -9,7 +9,8 @@ kobotools_kpi_data(
   url = "eu.kobotoolbox.org",
   uname = "",
   pwd = "",
-  encoding = "UTF-8"
+  encoding = "UTF-8",
+  format = "json"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ kobotools_kpi_data(
 \item{pwd}{is the password of the account}
 
 \item{encoding}{is the encoding to be used. Default is "UTF-8".}
+
+\item{format}{lets you define the format of output for e.g. json or xml}
 }
 \value{
 The function returns the data in json format

@@ -9,7 +9,8 @@ kobotools_api(
   simplified = TRUE,
   uname = "",
   pwd = "",
-  encoding = "UTF-8"
+  encoding = "UTF-8",
+  qry = ""
 )
 }
 \arguments{
@@ -22,12 +23,14 @@ kobotools_api(
 \item{pwd}{takes the password}
 
 \item{encoding}{is the encoding to be used. Default is "UTF-8".}
+
+\item{qry}{to add queries}
 }
 \value{
 The function returns the asset details from the API, inform of a data frame or json.
 }
 \description{
-`kobotools_api` is a wrapper for kobotoolbox API `https://[kpi-url]/api/v2/assets.json`
+`kobotools_api` is a wrapper for kobotoolbox API `https://[kpi-url]/api/v2/assets/`
 }
 \details{
 The function takes two variables. First one is `url` which is the `[kpi-url]`. For most users it will be "eu.kobotoolbox.org" or

@@ -21,7 +21,7 @@ kobo_export_create(
   sub_ids = NULL,
   qry = NULL,
   flatten = "true",
-  sleep = 2
+  sleep = 3
 )
 }
 \arguments{
@@ -67,7 +67,7 @@ a JSON object containing a valid Mongo query or An empty JSON object (no filteri
 The function creates an export, prints and returns the URL of the export created
 }
 \description{
-`kobo_export_create` is a wrapper for kobotoolbox API `https://[url]/exports/..`
+`kobo_export_create` is a wrapper for kobotoolbox API `https://[kpi-URL]/api/v2/assets/[asset-uid]/exports/`
 }
 \details{
 The function creates an export of survey data. If successful, returns the URL of the data that can be directly downloaded/read/imported in R.

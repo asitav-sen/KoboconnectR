@@ -1,4 +1,10 @@
 
+#KoboconnectR 2.0.0
+
+All the functions are updated to use `httr2` as `httr` is approaching end of life.
+API calls now use version 2, instead of version 1 of Kobotoolbox REST APIs.
+
+
 #KoboconnectR 1.2.2
 
 Replaced `kobo.humanitarianresponse.info` with `eu.kobotoolbox.org` because of change in API location.

@@ -61,8 +61,8 @@ If "fields" is not included in the "export_settings", all columns will be includ
 The function returns a data frame of data downloaded from 'Kobotoolbox'.
 }
 \description{
-`kobo_df_download` is a wrapper for kobotoolbox API `https://[url]/exports/..`
+`kobo_df_download` is a wrapper for kobotoolbox API
 }
 \details{
-The function creates an export of survey data in 'csv'. If successful, it attempts to download the data and and return a data frame.
+The function creates an export of survey data in 'csv'. If successful, it attempts to download the data and and return a data frame. Finally, the function attempts to delete the export.
 }

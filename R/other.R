@@ -1,16 +1,23 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Extract Kobotools data to R")
 }
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables("e")
+}
 
 is_response <- function(x) {
   class(x) == "response"
 }
+
+
 
 export_creator <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "",
                            assetid = "", type = "csv", all = "false", lang = "_default",
                            hierarchy = "false", include_grp = "true", grp_sep = "/", multi_sel = "both",
                            fields = NULL, media_url = "true", sub_ids = NULL,
                            qry = NULL, flatten = "true", xls_typ_as_text = "false", sleep = 2) {
+
+  # Validate input parameters
   if (!is.character(url)) stop("URL entered is not a string")
   if (!is.character(uname)) stop("uname (username) entered is not a string")
   if (!is.character(pwd)) stop("pwd (password) entered is not a string")
@@ -19,7 +26,6 @@ export_creator <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "",
   if (!is.character(all)) stop("all entered is not a string")
   if (!is.character(lang)) stop("lang entered is not a string")
   if (!is.character(hierarchy)) stop("hierarchy entered is not a string")
-  # if(!is.character(grp_sep)) stop("grp_sep entered is not a string")
   if (!is.character(include_grp)) stop("include_grp entered is not a string")
   if (!is.character(multi_sel)) stop("multi_sel entered is not a string")
   if (!is.character(media_url)) stop("media_url entered is not a string")
@@ -39,130 +45,156 @@ export_creator <- function(url = "eu.kobotoolbox.org", uname = "", pwd = "",
   if (is.null(all)) stop("all empty")
   if (is.null(lang)) stop("lang empty")
   if (is.null(hierarchy)) stop("hierarchy empty")
-  # if(is.null(grp_sep)) stop("grp_sep empty")
-  if (is.null(include_grp)) stop("include_grp empty")
   if (include_grp == "true" & is.null(grp_sep)) stop("grp_sep cannot be empty")
-  # if(include_grp=="false" & !is.null(grp_sep)) stop("grp_sep should be empty if include_grp is false")
 
-  pre_export <- kobo_exports(url = url, uname = uname, pwd = pwd)
+  # Step 1: Get the list of existing exports
+  pre_export <- kobo_exports(url = url, uname = uname, pwd = pwd, assetid = assetid)
+  if (is.null(pre_export)) {
+    stop("Failed to retrieve existing exports.")
+  }
   pre_count <- ifelse(is.null(pre_export$count), 0, pre_export$count)
-  pre_time <- ifelse(is.null(pre_export$results$date_created), 0, max(pre_export$results$date_created))
-  # pre_uid<-pre_export$results[pre_export$results$date_created==max(pre_export$results$date_created),]$uid
-  # pre_create<-max(pre_export$results$date_created)
+
+
+  # Step 2: Make the API request to create a new export
   fullurl <- paste0("https://", url, "/api/v2/assets/", assetid, "/exports/")
   task <- tryCatch(
-    expr = {
-      POST(fullurl, authenticate(uname, pwd),
-        body = list(
-          # source=paste0("https://",url,"/assets/",assetid,"/"),
+    {
+      response <- httr2::request(fullurl) |>
+        httr2::req_auth_basic(uname, pwd) |>
+        httr2::req_body_form(
           fields_from_all_versions = all,
           group_sep = grp_sep,
           hierarchy_in_labels = hierarchy,
           lang = lang,
           multiple_select = multi_sel,
           type = type,
-          fields = fields,
+          fields = if (is.null(fields)) NULL else paste(fields, collapse = ","),
           flatten = flatten,
           xls_types_as_text = xls_typ_as_text,
           include_media_url = media_url,
-          submission_ids = sub_ids,
+          submission_ids = if (is.null(sub_ids)) NULL else paste(sub_ids, collapse = ","),
           query = qry
-        ),
-        timeout(sleep * 2)
-      )
+        ) |>
+        httr2::req_method("POST") |>
+        httr2::req_timeout(sleep*3) |>
+        httr2::req_perform()
+
+      cat("Waiting..",sleep*3, "seconds \n")
+      Sys.sleep(sleep*3)
+
+
+      if (httr2::resp_status(response) != 201) {
+        stop("Failed to send export instruction. HTTP status:", httr2::resp_status(response))
+      }
+      response
     },
-    error = function(x) {
-      print("There was some error")
+    error = function(e) {
+      cat("Error during export creation:", e$message, "\n")
       return(NULL)
     }
   )
-  if (!is.null(task)) {
+
+  # Step 3: Wait for some time to allow the API to process
+  if(!is.null(task)){
     if (task$status_code == 201) cat("Export instruction sent successfully. Waiting for result. \n")
-    Sys.sleep(sleep)
-
-    post_export <- tryCatch(
-      expr = {
-        kobo_exports(url = url, uname = uname, pwd = pwd)
-      }, error = function(x) {
-        print("List of exports could not be retrieved.")
-        return(NULL)
-      }
-    )
-
-    if (!is.null(post_export)) {
-      Sys.sleep(sleep * 2)
-      post_count <- post_export$count
-      post_time <- max(post_export$results$date_created)
+    Sys.sleep(sleep*3)
+  }
 
 
-      if (post_time <= pre_time) {
-        cat("Execution in Progress...")
-        Sys.sleep(sleep * 2)
-      }
-
-      if (post_time <= pre_time) {
-        cat("Timeout")
-        return(NULL)
-      } else {
-        if (post_export$results$status[post_count] == "error") {
-          print(paste0(
-            "Did not execute. Encountered ", post_export$results$messages$error_type[post_count], ". ",
-            post_export$results$messages$error[post_count], ". \n"
-          ))
-          return(NULL)
-        } else {
-          print("Export successful")
-
-          if (is.na(post_export$results$result[post_count])) {
-            print("waiting..")
-            Sys.sleep(sleep * 5)
-          }
-          if (is.na(post_export$results$result[post_count])) {
-            print("Could not get export list")
-            return(NULL)
-          } else {
-            print(post_export$results$result[post_count])
-            new_url <- post_export$results$result[post_count]
-            uid <- post_export$results$uid[post_count]
-            created_list <- list(new_url, uid)
-            return(created_list)
-          }
-        }
-      }
-    } else {
-      print("There was some error. List of exports could not be retrieved.")
+  # Step 4: Get the list of existing exports again
+  post_export <- tryCatch(
+    {
+      x<-kobo_exports(url = url, uname = uname, pwd = pwd, assetid = assetid)
+      Sys.sleep(sleep * 3)
+      x
+    },
+    error = function(e) {
+      cat("Error during retrieval of new exports:", e$message, "\n")
       return(NULL)
     }
-  } else {
-    print("There was some error. Export instruction was not sent succesfully.")
+  )
+
+  if(!is.null(post_export)){
+
+    post_count <- post_export$count
+
+    #check is status is error
+
+    if (post_export$results[[post_count]]$status == "error") {
+      print(paste0(
+        "Did not execute. Encountered ", post_export$results[[post_count]]$messages$error_type, ". ",
+        post_export$results[[post_count]]$messages$error, ". \n"
+      ))
+    }
+  }
+  if (is.na(post_count)) {
+    cat("Export process taking too long. Please increase the sleep value.\n")
     return(NULL)
   }
+
+
+  # Step 6: Retrieve the URL and UID of the new export
+  new_export <- post_export$results[[post_count]]
+  new_url <- new_export$result
+  new_uid <- new_export$uid
+
+  result_list <- list(new_url, new_uid)
+  print(result_list)
+
+  return(result_list)
 }
+
+
 
 
 export_downloader <- function(exp.url, fsep, uname, pwd, sleep, type = "csv") {
   if (type == "csv") {
     tmp_file <- tempfile()
-    df <- httr::GET(exp.url, httr::authenticate(user = uname, password = pwd), progress())
-    Sys.sleep(sleep)
-    dff <- httr::content(df, type = "raw", encoding = "UTF-8")
-    Sys.sleep(sleep)
-    writeBin(dff, tmp_file)
-    dff <- read.csv(tmp_file, sep = fsep)
+    tryCatch(
+      {
+        response <- httr2::request(exp.url) |>
+          httr2::req_auth_basic(uname, pwd) |>
+          httr2::req_method("GET") |>
+          httr2::req_perform()
+
+        Sys.sleep(sleep * 2)
+
+        # Download the content as raw and write it to a temporary file
+        dff <- httr2::resp_body_raw(response)
+        writeBin(dff, tmp_file)
+
+        Sys.sleep(sleep)
+
+        # Read the CSV file
+        dff <- read.csv(tmp_file, sep = fsep)
+      },
+      error = function(e) {
+        cat("Error: ", e$message, "\n")
+        return(NULL)
+      }
+    )
   }
 
   if (type == "xls") {
-    httr::GET(
-      exp.url, httr::authenticate(user = uname, password = pwd),
-      httr::write_disk("kobodl.xlsx", overwrite = TRUE), progress()
-    )
-    path <- "kobodl.xlsx"
-    dff <- purrr::map(rlang::set_names(readxl::excel_sheets(path)), readxl::read_excel, path = path)
+    tryCatch(
+      {
+        path <- "kobodl.xlsx"
 
-    # path |>
-    # readxl::excel_sheets() |>
-    # rlang::set_names() |>
-    # purrr::map(readxl::read_excel, path=path)
+        response <- httr2::request(exp.url) |>
+          httr2::req_auth_basic(uname, pwd) |>
+          httr2::req_method("GET") |>
+          httr2::req_perform(path=path)
+
+        Sys.sleep(sleep)
+
+        # Read all sheets from the Excel file
+        dff <- purrr::map(rlang::set_names(readxl::excel_sheets(path)), readxl::read_excel, path = path)
+      },
+      error = function(e) {
+        cat("Error: ", e$message, "\n")
+        return(NULL)
+      }
+    )
   }
 
   return(dff)
