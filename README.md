@@ -7,7 +7,10 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/KoboconnectR)](https://CRAN.R-project.org/package=KoboconnectR)
-[![R-CMD-check](https://github.com/asitav-sen/KoboconnectR/workflows/R-CMD-check/badge.svg)](https://github.com/asitav-sen/KoboconnectR/actions)
+[![CRAN
+checks](https://badges.cranchecks.info/summary/KoboconnectR.svg)](https://cran.r-project.org/web/checks/check_results_KoboconnectR.html)
+[![License:
+GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3.0)
 [![](https://cranlogs.r-pkg.org/badges/KoboconnectR)](https://cran.r-project.org/package=KoboconnectR)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/KoboconnectR?color=blue)](https://r-pkg.org/pkg/KoboconnectR)
 
@@ -42,28 +45,30 @@ ways for one to extract the token value. If there is a token, the
 easiest way to retrieve it is by using `get_kobo_token()` function.
 
 ``` r
-kobotools_kpi_data(assetid= "assetid", url="kobo.humanitarianresponse.info", uname="username", pwd="password")
+kobotools_kpi_data(assetid = "assetid", url = "eu.kobotoolbox.org", uname = "username", pwd = "password")
 ```
 
 To find the asset id, one can use the `kobotools_api()` function that
 returns a list of assets the user has access to.
 
 ``` r
-kobotools_api(url="kobo.humanitarianresponse.info", simplified=T, uname="userid", pwd="password")
+kobotools_api(url = "eu.kobotoolbox.org", simplified = T, uname = "userid", pwd = "password")
 ```
 
 ## Downloading data
 
 ``` r
-KoboconnectR::kobo_df_download(uname = "username",
-                                          pwd="password", assetid = "assetid",
-                                          lang = "English (en)", all="false", lang="_default",
-                               hierarchy="false", include_grp="true",grp_sep="/",fsep=";",
-                              multi_sel="both", media_url="true", fields=NULL, sub_ids=NULL, sleep=2)
+KoboconnectR::kobo_df_download(
+  uname = "username",
+  pwd = "password", assetid = "assetid",
+  lang = "English (en)", all = "false", lang = "_default",
+  hierarchy = "false", include_grp = "true", grp_sep = "/", fsep = ";",
+  multi_sel = "both", media_url = "true", fields = NULL, sub_ids = NULL, sleep = 2
+)
 ```
 
 **IF THE DOWNLOAD FAILS, TRY INCREASING THE `SLEEP` PARAMETER (use the
-dev version please).**
+latest version please, dev version, if required).**
 
 For further details, check the vignette.
 
@@ -82,7 +87,7 @@ Please feel free to add issue of suggestions in
 
 The following packages are required to install and run this package.
 
-1.  Package [`httr`](https://cran.r-project.org/package=httr)
+1.  Package [`httr2`](https://httr2.r-lib.org)
 2.  Package [`jsonlite`](https://cran.r-project.org/package=jsonlite)
 3.  Package [`curl`](https://cran.r-project.org/package=curl)
 4.  Package [`mime`](https://cran.r-project.org/package=mime)
