@@ -84,21 +84,23 @@
 </h2>
 <p>Before being able to use the kobotoolbox API, one needs to set up API token. The <a href="https://support.kobotoolbox.org/api.html" class="external-link">kobotoolbox documentation</a> lists multiple ways for one to extract the token value. If there is a token, the easiest way to retrieve it is by using <code><a href="reference/get_kobo_token.html">get_kobo_token()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/kobotools_kpi_data.html">kobotools_kpi_data</a></span><span class="op">(</span>assetid<span class="op">=</span> <span class="st">"assetid"</span>, url<span class="op">=</span><span class="st">"kobo.humanitarianresponse.info"</span>, uname<span class="op">=</span><span class="st">"username"</span>, pwd<span class="op">=</span><span class="st">"password"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/kobotools_kpi_data.html">kobotools_kpi_data</a></span><span class="op">(</span>assetid <span class="op">=</span> <span class="st">"assetid"</span>, url <span class="op">=</span> <span class="st">"eu.kobotoolbox.org"</span>, uname <span class="op">=</span> <span class="st">"username"</span>, pwd <span class="op">=</span> <span class="st">"password"</span><span class="op">)</span></span></code></pre></div>
 <p>To find the asset id, one can use the <code><a href="reference/kobotools_api.html">kobotools_api()</a></code> function that returns a list of assets the user has access to.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/kobotools_api.html">kobotools_api</a></span><span class="op">(</span>url<span class="op">=</span><span class="st">"kobo.humanitarianresponse.info"</span>, simplified<span class="op">=</span><span class="cn">T</span>, uname<span class="op">=</span><span class="st">"userid"</span>, pwd<span class="op">=</span><span class="st">"password"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/kobotools_api.html">kobotools_api</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"eu.kobotoolbox.org"</span>, simplified <span class="op">=</span> <span class="cn">T</span>, uname <span class="op">=</span> <span class="st">"userid"</span>, pwd <span class="op">=</span> <span class="st">"password"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="downloading-data">Downloading data<a class="anchor" aria-label="anchor" href="#downloading-data"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">KoboconnectR</span><span class="fu">::</span><span class="fu"><a href="reference/kobo_df_download.html">kobo_df_download</a></span><span class="op">(</span>uname <span class="op">=</span> <span class="st">"username"</span>,</span>
-<span>                                          pwd<span class="op">=</span><span class="st">"password"</span>, assetid <span class="op">=</span> <span class="st">"assetid"</span>,</span>
-<span>                                          lang <span class="op">=</span> <span class="st">"English (en)"</span>, all<span class="op">=</span><span class="st">"false"</span>, lang<span class="op">=</span><span class="st">"_default"</span>,</span>
-<span>                               hierarchy<span class="op">=</span><span class="st">"false"</span>, include_grp<span class="op">=</span><span class="st">"true"</span>,grp_sep<span class="op">=</span><span class="st">"/"</span>,fsep<span class="op">=</span><span class="st">";"</span>,</span>
-<span>                              multi_sel<span class="op">=</span><span class="st">"both"</span>, media_url<span class="op">=</span><span class="st">"true"</span>, fields<span class="op">=</span><span class="cn">NULL</span>, sub_ids<span class="op">=</span><span class="cn">NULL</span>, sleep<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><strong>IF THE DOWNLOAD FAILS, TRY INCREASING THE <code>SLEEP</code> PARAMETER (use the dev version please).</strong></p>
+<code class="sourceCode R"><span><span class="fu">KoboconnectR</span><span class="fu">::</span><span class="fu"><a href="reference/kobo_df_download.html">kobo_df_download</a></span><span class="op">(</span></span>
+<span>  uname <span class="op">=</span> <span class="st">"username"</span>,</span>
+<span>  pwd <span class="op">=</span> <span class="st">"password"</span>, assetid <span class="op">=</span> <span class="st">"assetid"</span>,</span>
+<span>  lang <span class="op">=</span> <span class="st">"English (en)"</span>, all <span class="op">=</span> <span class="st">"false"</span>, lang <span class="op">=</span> <span class="st">"_default"</span>,</span>
+<span>  hierarchy <span class="op">=</span> <span class="st">"false"</span>, include_grp <span class="op">=</span> <span class="st">"true"</span>, grp_sep <span class="op">=</span> <span class="st">"/"</span>, fsep <span class="op">=</span> <span class="st">";"</span>,</span>
+<span>  multi_sel <span class="op">=</span> <span class="st">"both"</span>, media_url <span class="op">=</span> <span class="st">"true"</span>, fields <span class="op">=</span> <span class="cn">NULL</span>, sub_ids <span class="op">=</span> <span class="cn">NULL</span>, sleep <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><strong>IF THE DOWNLOAD FAILS, TRY INCREASING THE <code>SLEEP</code> PARAMETER (use the latest version please, dev version, if required).</strong></p>
 <p>For further details, check the vignette.</p>
 </div>
 <div class="section level2">
@@ -116,7 +118,7 @@
 </h2>
 <p>The following packages are required to install and run this package.</p>
 <ol style="list-style-type: decimal">
-<li>Package <a href="https://cran.r-project.org/package=httr" class="external-link"><code>httr</code></a>
+<li>Package <a href="https://httr2.r-lib.org" class="external-link"><code>httr2</code></a>
 </li>
 <li>Package <a href="https://cran.r-project.org/package=jsonlite" class="external-link"><code>jsonlite</code></a>
 </li>
@@ -175,7 +177,8 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=KoboconnectR" class="external-link"><img src="https://www.r-pkg.org/badges/version/KoboconnectR" alt="CRAN status"></a></li>
-<li><a href="https://github.com/asitav-sen/KoboconnectR/actions" class="external-link"><img src="https://github.com/asitav-sen/KoboconnectR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://cran.r-project.org/web/checks/check_results_KoboconnectR.html" class="external-link"><img src="https://badges.cranchecks.info/summary/KoboconnectR.svg" alt="CRAN checks"></a></li>
+<li><a href="https://cran.r-project.org/web/licenses/GPL-3.0" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="License: GPL-3.0"></a></li>
 <li><a href="https://cran.r-project.org/package=KoboconnectR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/KoboconnectR"></a></li>
 <li><a href="https://r-pkg.org/pkg/KoboconnectR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/KoboconnectR?color=blue"></a></li>
 </ul>
