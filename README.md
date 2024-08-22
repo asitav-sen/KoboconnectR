@@ -61,7 +61,7 @@ kobotools_api(url = "eu.kobotoolbox.org", simplified = T, uname = "userid", pwd 
 KoboconnectR::kobo_df_download(
   uname = "username",
   pwd = "password", assetid = "assetid",
-  lang = "English (en)", all = "false", lang = "_default",
+  all = "false", lang = "_default",
   hierarchy = "false", include_grp = "true", grp_sep = "/", fsep = ";",
   multi_sel = "both", media_url = "true", fields = NULL, sub_ids = NULL, sleep = 2
 )
