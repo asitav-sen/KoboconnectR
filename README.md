@@ -16,6 +16,8 @@ GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://cran.r
 
 <!-- badges: end -->
 
+** Due to changes in Kobotoolbox API v2 (addition of synchronous data download), the current version of the package is not working properly. The package will be updated soon **
+
 The goal of KoboconnectR is to facilitate data extraction from
 Kobotoolbox projects/assets into R, instead of downloading the
 individual spreadsheet files.
